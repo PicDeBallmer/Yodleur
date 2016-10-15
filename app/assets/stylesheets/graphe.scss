@@ -1,0 +1,23 @@
+.graphe {
+  background-color: #eee;
+}
+
+.node {
+  stroke: white;
+  stroke-width: 1.5px;
+  fill: #333;
+}
+
+.node_desc {
+  color: white;
+}
+
+.node_desc:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link {
+  stroke: #999;
+  stroke-width: 3px;
+}
