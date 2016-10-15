@@ -12,5 +12,9 @@ Rails.application.routes.draw do
   get '/liste_utilisateurs' => 'utilisateurs#index'
   get '/a_propos' => 'pages#a_propos'
   
-
+  # session
+  get 'sessions/new'
+  get 'log_out' => 'sessions#destroy', :as => 'log_out'
+  get 'log_in' => 'sessions#new', :as => 'log_in'
+  get 'sign_up' => 'utilisateurs#new', :as => 'sign_up'
 end
