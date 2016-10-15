@@ -1,0 +1,2 @@
+class MotNuage < ApplicationRecord
+end
