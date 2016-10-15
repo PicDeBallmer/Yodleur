@@ -1,0 +1,10 @@
+<% if logged_in? %>
+  <div class="pull-left">
+    <%= image_tag(utilisateur_courant.image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+  </div>
+  <%= menu_item "Connecté : #{utilisateur_courant.prenom} #{utilisateur_courant.nom} ", utilisateur_path(utilisateur_courant) %>
+  <%= menu_item 'Déconnexion', log_out_path %>
+<% else %>
+  <%= menu_item 'Inscription', sign_up_path %>
+  <%= menu_item 'Connexion', log_in_path %>
+<% end %>
