@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mot_nuages
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   default_url_options :host => "localhost:3000"
   root 'pages#accueil'
@@ -11,6 +12,17 @@ Rails.application.routes.draw do
   get '/resultats' => 'groupes#index_outdated'
   get '/liste_utilisateurs' => 'utilisateurs#index'
   get '/a_propos' => 'pages#a_propos'
+  
+    # ressources
+  resources :utilisateurs
+  resources :delegations
+  resources :sessions
+  resources :groupes
+  resources :lieux
+  resources :categories
+  resources :sujets do
+    resources :commentaires
+  end
   
   # session
   get 'sessions/new'
