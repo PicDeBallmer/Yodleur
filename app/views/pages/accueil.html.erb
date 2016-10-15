@@ -1,0 +1,56 @@
+<h1>YODLEUR Organise la Démocratie Liquide dans l'Esprit Utopique Républicain</h1>
+
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <blockquote>
+      <p>Yodleur, la meilleure application de démocratie liquide.</p>
+      <footer>Joseph Staline</footer>
+    </blockquote>
+
+    <blockquote>
+      <p>On ne peut plus s'en passer !</p>
+      <footer>Fidel Castro</footer>
+    </blockquote>
+
+    <blockquote>
+      <p>Yodelaaahouhiiii</p>
+      <footer>Franzl Lang</footer>
+    </blockquote>
+  </div>
+
+  <div id="nuage_mots_conteneur" class="col-lg-6 col-md-12">
+    <canvas id="nuage_mots">
+      <p>Votre navigateur ne supporte pas le nuage de mots</p>
+    </canvas>
+    <ul id="liste_mots">
+      <% if false %>
+      TODO Temp commentaire for dev
+      <% liste_mots_pour_nuage.each do |mot| %>
+        <li><%= link_to mot.mot, groupes_path(search: mot.mot), data: {poids: mot.poids} %></li>
+      <% end %>
+    <% end %>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      if( ! $('#nuage_mots').tagcanvas({
+            maxSpeed : 0.03,
+            depth : 0.75,
+            dragControl : true,
+            decel : 0.99,
+            outlineMethod : 'size',
+//            freezeActive : true,
+            weight : true,
+            weightMode : 'both',
+            weightFrom : 'data-poids',
+            textFont : null,
+            weightGradient : {0: '#008cba', 1: '#222'}
+//            txtOpt : false
+          }, 'liste_mots')) {
+        // TagCanvas failed to load
+        $('#nuage_mots_conteneur').hide();
+      }
+      // your other jQuery stuff here...
+    });
+  </script>
+</div>
