@@ -23,9 +23,9 @@ class Groupe < ApplicationRecord
   #   end
   # end
   #
-  # def createur
-  #   self.sujets.first.createur
-  # end
+  def createur
+    self.sujets.first.createur
+  end
   #
   # def en_cours?
   #   DateTime.now.between? self.date_debut, self.date_fin

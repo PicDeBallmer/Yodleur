@@ -1,3 +1,4 @@
+# coding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -5,3 +6,53 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+utilisateurs = Utilisateur.create(
+  [
+  {droits: 0},
+  {droits: 1},
+  {droits: 2}])
+
+p "Created #{Utilisateur.count} utilisateurs"
+
+groupes = Groupe.create(
+    [{titre: 'Améliorer le WiFi dans les salles de TP', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
+     {titre: 'Installer une tireuse à bière en Gaston Berger', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
+     {titre: 'Planter des arbres sur les humas', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
+     {titre: 'Organiser un concert de Barbiche', date_debut: DateTime.yesterday, date_fin: DateTime.now}])
+
+p "Created #{Groupe.count} groupes"
+
+sujets = Sujet.create!(
+    [
+        {createur: utilisateurs[0], groupe: groupes[0], titre:'Améliorer le WiFi dans les salles de TP'},
+        {createur: utilisateurs[0], groupe: groupes[1], titre:' Installer une tireuse à bière en Gaston Berger'},
+        {createur: utilisateurs[0], groupe: groupes[2], titre:'Planter des arbres sur les humas'},
+        {createur: utilisateurs[1], groupe: groupes[3], titre:'Organiser un concert de Barbiche'}])
+
+p "Created #{Sujet.count} sujets"
+
+categories = Categorie.create(
+    [{nom: 'Sport'},
+     {nom: 'Culture'},
+     {nom: 'Numérique'},
+     {nom: 'Environnement'},
+     {nom: 'Social'},
+     {nom: 'Education'}])
+
+p "Created #{Categorie.count} categories"
+
+lieus = Lieu.create(
+    [{nom: 'Villeurbanne'},
+     {nom: 'Lyon 1'},
+     {nom: 'Lyon 2'},
+     {nom: 'Lyon 3'},
+     {nom: 'Lyon 4'}])
+
+p "Created #{Lieu.count} lieus"
+
+mot_nuages = MotNuage.create(
+    [{mot: 'Barbiche', poids: 20},
+     {mot: 'INSA', poids: 10}])
+
+p "Created #{MotNuage.count} mot_nuages"

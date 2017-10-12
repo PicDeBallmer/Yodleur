@@ -1,13 +1,11 @@
 class Sujet < ApplicationRecord
 
-  attr_accessor :titre
-  attr_accessor :description
+  belongs_to :createur,
+             class_name: 'Utilisateur'
 
-  # belongs_to :createur,
-  #            class_name: 'Utilisateur'
-  #
-  # belongs_to :parent,
-  #            class_name: 'Sujet'
+  belongs_to :parent,
+             class_name: 'Sujet',
+             optional: true
 
   belongs_to :groupe
 

@@ -1,7 +1,5 @@
 class Lieu < ApplicationRecord
 
-  attr_accessor :nom
-
   has_many :utilisateurs
   has_many :sujets
 

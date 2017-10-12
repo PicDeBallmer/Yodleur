@@ -1,7 +1,5 @@
 class Categorie < ApplicationRecord
 
-  attr_accessor :nom
-
   # has_many :delegations_donnees
   # # has_many :donneurs,
   # #          :through => :delegations,
