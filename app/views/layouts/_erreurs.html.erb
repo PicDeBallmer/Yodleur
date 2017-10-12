@@ -1,0 +1,9 @@
+<% if !erreurs.nil? && erreurs.any? %>
+    <div class="explication_erreur">
+      <ul>
+        <% erreurs.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

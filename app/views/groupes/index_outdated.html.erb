@@ -1,0 +1,91 @@
+<% unless notice.nil? %>
+    <p id="notice"><%= notice %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h1>Référendums terminés</h1>
+    <div class="pull-right">
+      <%= form_tag(voter_path, method: 'get', id: 'search-form') do %>
+          <p>
+            <%= text_field_tag :search, params[:search], placeholder: 'Recherche...' %>
+            <%= submit_tag 'Rechercher' %>
+          </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Liste des référendums -->
+
+<div class="row">
+
+  <div class="col-lg-6">
+    <h3>Référendums institutionnels</h3>
+    <% @groupes.each do |groupe| %>
+        <% if groupe.date_fin < DateTime.now  && !groupe.createur.pelo? %>
+            <div class="well">
+              <p class="pull-right">
+                <%= pluralize(groupe.votes_total, 'vote') %> (total)
+              </p>
+              <p>
+                <%= link_to groupe.titre, groupe %>
+              </p>
+              <p>
+                <%= groupe.description_courte %><%= link_to 'voir plus', groupe %>
+              </p>
+              <p>
+                Résultats : La réponse majoritaire à ce référendum est
+                <b>
+                  <% if  groupe.victoire? %>
+                      OUI !
+                  <% else %>
+                      NON !
+                  <% end %>
+                </b>
+              </p>
+              <p>
+                <% groupe.resultat_phrase %>
+              </p>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+
+
+  <div class="col-lg-6">
+    <h3>Référendums citoyens</h3>
+    <% @groupes.each do |groupe| %>
+        <% if groupe.date_fin < DateTime.now  && groupe.createur.pelo? %>
+            <div class="well">
+              <p class="pull-right">
+                <%= pluralize(groupe.votes_total, 'vote') %> (total)
+              </p>
+              <p>
+                <%= link_to groupe.titre, groupe %>
+              </p>
+              <p>
+                <%= groupe.description_courte %><%= link_to 'voir plus', groupe %>
+              </p>
+              <p>
+                Résultats : La réponse majoritaire à ce référendum est
+                <b>
+                  <% if  groupe.victoire? %>
+                      OUI !
+                  <% else %>
+                      NON.
+                  <% end %>
+                </b>
+              </p>
+              <p>
+                <% groupe.resultat_phrase %>
+              </p>
+            </div>
+        <% end %>
+    <% end %>
+  </div>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h1>Créer un compte</h1>
+  </div>
+</div>
+
+<%= form_for @utilisateur do |f| %>
+
+    <%= render 'layouts/erreurs', erreurs: @utilisateur.errors %>
+
+    <div class="form-group">
+      <%= f.label :civilite %>
+      <%= f.select :civilite, UtilisateursHelper.civilites_select, {}, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :prenom, 'Prénom' %>
+      <%= f.text_field :prenom, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :nom, 'Nom' %>
+      <%= f.text_field :nom, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :date_de_naissance %><br>
+      <%= f.date_select :date_de_naissance,
+                        use_two_digit_numbers: true,
+                        date_separator: " / ",
+                        start_year: Date.today.year - 120,
+                        end_year: Date.today.year,
+                        include_blank: true
+      %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :lieu_de_naissance, "Lieu de naissance" %><br>
+      <%= f.text_field :lieu_de_naissance, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :lieu_id , "Lieu de résidence" %><br>
+      <%= f.select :lieu_id, LieuxHelper.lieux_select, { include_blank: true }, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :mail, 'Courriel' %><br>
+      <%= f.text_field :mail, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password, 'Mot de passe' %><br>
+      <%= f.password_field :password, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Confirmer le mot de passe' %><br>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fichier, 'Pièce d\'identité' %>
+      <%= f.file_field :fichier %>
+      <p class="help-block">
+        Afin de valider votre inscription auprès de votre mairie, merci de joindre une copie de pièce d'identité valide.
+      </p>
+    </div>
+
+    <%= f.submit 'Créer un compte', class: 'btn btn-primary btn-lg' %>
+
+    <%= link_to 'J\'ai déjà un compte', log_in_path, class: 'btn btn-default btn-lg' %>
+
+<% end %>
