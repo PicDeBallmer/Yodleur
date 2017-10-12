@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   root 'pages#accueil'
 
   # menu
-  get '/accueil' => 'pages#accueil'
-  get '/proposer'  => 'groupes#new'
-  get '/mes_propositions'  => 'groupes#index_mygroups'
-  get '/voter' => 'groupes#index'
-  get '/resultats' => 'groupes#index_outdated'
+  get '/accueil'            => 'pages#accueil'
+  get '/a_propos'           => 'pages#a_propos'
+  get '/proposer'           => 'groupes#new'
+  get '/mes_propositions'   => 'groupes#index_mygroups'
+  get '/voter'              => 'groupes#index'
+  get '/resultats'          => 'groupes#index_outdated'
   get '/liste_utilisateurs' => 'utilisateurs#index'
-  get '/a_propos' => 'pages#a_propos'
-  
+
   # ressources
   resources :mot_nuages
   resources :utilisateurs
