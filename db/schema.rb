@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20171012132426) do
 
   add_index "sujets", ["createur_id"], name: "index_sujets_on_createur_id"
   add_index "sujets", ["groupe_id"], name: "index_sujets_on_groupe_id"
-  # add_index "sujets", ["parent_id"], name: "index_sujets_on_parent_id"
+  add_index "sujets", ["parent_id"], name: "index_sujets_on_parent_id"
 
   create_table "utilisateurs", force: :cascade do |t|
     t.string   "nom"

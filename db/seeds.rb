@@ -25,10 +25,18 @@ p "Created #{Groupe.count} groupes"
 
 sujets = Sujet.create!(
     [
-        {createur: utilisateurs[0], groupe: groupes[0], titre:'Améliorer le WiFi dans les salles de TP'},
-        {createur: utilisateurs[0], groupe: groupes[1], titre:' Installer une tireuse à bière en Gaston Berger'},
-        {createur: utilisateurs[0], groupe: groupes[2], titre:'Planter des arbres sur les humas'},
-        {createur: utilisateurs[1], groupe: groupes[3], titre:'Organiser un concert de Barbiche'}])
+        {createur: utilisateurs[0], groupe: groupes[0], titre:'Améliorer le WiFi dans les salles de TP',
+         description: 'Améliorer le WiFi dans les salles de TP',
+         votes_blancs: 0, votes_pour: 0, votes_contre: 0},
+        {createur: utilisateurs[0], groupe: groupes[1], titre:'Installer une tireuse à bière en Gaston Berger',
+         description: 'Installer une tireuse à bière en Gaston Berger',
+         votes_blancs: 0, votes_pour: 0, votes_contre: 0},
+        {createur: utilisateurs[0], groupe: groupes[2], titre:'Planter des arbres sur les humas',
+         description: 'Planter des arbres sur les humas',
+         votes_blancs: 0, votes_pour: 0, votes_contre: 0},
+        {createur: utilisateurs[1], groupe: groupes[3], titre:'Organiser un concert de Barbiche',
+         description: 'Organiser un concert de Barbiche',
+         votes_blancs: 0, votes_pour: 0, votes_contre: 0}])
 
 p "Created #{Sujet.count} sujets"
 

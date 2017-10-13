@@ -9,9 +9,9 @@ module UtilisateursHelper
     }
   end
 
-  # def self.droits_egal?(cible, droit)
-  #   droits[cible] == droit
-  # end
+  def self.droits_egal?(cible, droit)
+    droits[cible] == droit
+  end
 
   # def self.droits_select
   #   # Convertit la liste de droits dans la format [[:pelo, 0], ...]

@@ -12,27 +12,27 @@ class Sujet < ApplicationRecord
   # has_many :fils,
   #          class_name: 'Sujet',
   #          foreign_key: 'parent_id'
-  #
-  # has_and_belongs_to_many :utilisateurs,
-  #                         class_name: 'Utilisateur',
-  #                         join_table: 'votes'
-  #
+
+  has_and_belongs_to_many :utilisateurs,
+                          class_name: 'Utilisateur',
+                          join_table: 'votes'
+
   # has_many :commentaires
-  #
-  # alias_method :votants, :utilisateurs
-  #
-  # ####### VALIDATION ######
-  # validates :createur, :groupe, :titre, :description,
-  #           :votes_blancs, :votes_contre, :votes_pour, presence: true
-  #
-  # after_destroy :detruit_si_groupe_vide
-  #
-  # ###### FONCTIONS ######
-  # public
-  # def nombre_votants
-  #   self.votants.count
-  # end
-  #
+
+  alias_method :votants, :utilisateurs
+
+  ####### VALIDATION ######
+  validates :createur, :groupe, :titre, :description,
+            :votes_blancs, :votes_contre, :votes_pour, presence: true
+
+  after_destroy :detruit_si_groupe_vide
+
+  ###### FONCTIONS ######
+  public
+  def nombre_votants
+    self.votants.count
+  end
+
   # def self.en_cours
   #   where(groupe_id: Groupe.en_cours.ids)
   # end
@@ -71,20 +71,19 @@ class Sujet < ApplicationRecord
   #   end
   #
   # end
-  #
-  # def description_courte
-  #   #sélectionne les 10 premiers mots de la chaine
-  #   description.split[0,15].join(" ") + "..."
-  # end
-  #
-  # def victoire?
-  #   (votes_pour > votes_contre)
-  # end
-  #
-  #
-  # def resultat_phrase
-  #   "Ce référendum a rassemblé " + votes_pour.to_s + " votes pour, " + votes_contre.to_s + " votes contre, " + votes_blancs.to_s + " votes blancs. "
-  # end
+
+  def description_courte
+    #sélectionne les 10 premiers mots de la chaine
+    description.split[0,15].join(" ") + "..."
+  end
+
+  def victoire?
+    (votes_pour > votes_contre)
+  end
+
+  def resultat_phrase
+    "Ce référendum a rassemblé " + votes_pour.to_s + " votes pour, " + votes_contre.to_s + " votes contre, " + votes_blancs.to_s + " votes blancs. "
+  end
 
   def self.search(search)
     Sujet.where("titre LIKE ?", "%#{search}%")
