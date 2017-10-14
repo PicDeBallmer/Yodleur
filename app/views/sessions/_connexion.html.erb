@@ -1,6 +1,10 @@
 <% if logged_in? %>
   <div class="pull-left">
-    <%= image_tag(utilisateur_courant.image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+    <% if utilisateur_courant.image.url != nil %>
+        <%= image_tag(utilisateur_courant.image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+    <% else %>
+        <%= image_tag('fraaaanz.png', size: '32', class: 'img-responsive center-block img-circle') %>
+    <% end %>
   </div>
   <%= menu_item "Connecté : #{utilisateur_courant.prenom} #{utilisateur_courant.nom} ", utilisateur_path(utilisateur_courant) %>
   <%= menu_item 'Déconnexion', log_out_path %>
