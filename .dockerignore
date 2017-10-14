@@ -1,0 +1,10 @@
+.git
+.idea
+.dockerignore
+.gitignore
+*.sqlite3
+*.sqlite3-journal
+log
+tmp
+README.md
+Gemfile.lock

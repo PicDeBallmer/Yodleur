@@ -1,10 +1,24 @@
 # README
 
 ##How to setup project
+###Setup project with
 ```
-rake db:load
+rake db:schema:load
 rake db:seed
 rails server
+```
+
+###Install gems with
+```
+bundle install
+```
+
+###ImageMagick needs to be installed
+Find how to install it depending on your platform
+
+Ubuntu
+```
+apt-get install imagemagick
 ```
 
 ##More

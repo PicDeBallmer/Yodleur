@@ -9,7 +9,7 @@
     <%= render 'layouts/erreurs', erreurs: @utilisateur.errors %>
 
     <div class="form-group">
-      <%= f.label :civilite %>
+      <%= f.label :civilite, 'Civilité' %>
       <%= f.select :civilite, UtilisateursHelper.civilites_select, {}, class: 'form-control' %>
     </div>
 
@@ -57,6 +57,11 @@
     <div class="form-group">
       <%= f.label :password_confirmation, 'Confirmer le mot de passe' %><br>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :image, 'Photo de profil' %><br>
+      <%= f.file_field :image %>
     </div>
 
     <div class="form-group">

@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20171012132426) do
     t.string   "prenom"
     t.string   "mail"
     t.integer  "droits"
-    t.integer  "categorie_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "password_digest"
@@ -110,7 +109,6 @@ ActiveRecord::Schema.define(version: 20171012132426) do
     t.string   "lieu_de_naissance"
   end
 
-  add_index "utilisateurs", ["categorie_id"], name: "index_utilisateurs_on_categorie_id"
   add_index "utilisateurs", ["lieu_id"], name: "index_utilisateurs_on_lieu_id"
 
   create_table "votes", id: false, force: :cascade do |t|
