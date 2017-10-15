@@ -1,0 +1,80 @@
+<p id="notice"><%= notice %></p>
+
+<h2 class="text-left">Mes référendums</h2>
+
+<div class="text-right">
+  <%= form_tag(voter_path, :method => "get", id: "search-form") do %>
+      <p><%= text_field_tag :search, params[:search], placeholder: "Recherche..."%>
+        <%= submit_tag "Rechercher", class: 'btn-custom' %></p>
+  <% end %>
+</div>
+
+<div class="text-center">
+  <%= link_to 'Proposer un nouveau projet ', proposer_path %>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+
+    <table class="table">
+
+      <thead>
+      <h3> Référendums en cours </h3>
+      <tr>
+        <th>Projet</th>
+        <th>Nombre de Votants</th>
+        <th>Ouverture</th>
+        <th>Fermeture</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @groupes.each do |groupe| %>
+          <% if groupe.createur == utilisateur_courant && groupe.date_fin > DateTime.now %>
+              <tr>
+                <td><%= link_to groupe.titre, groupe %></td>
+                <td><%= groupe.votes_total %></td>
+                <td><%=  l groupe.date_debut, format: :long %></td>
+                <td><%=  l groupe.date_fin, format: :long %></td>
+              </tr>
+          <%end%>
+      <% end %>
+      </table>
+  </div>
+
+
+
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+      <h3> Référendums terminés </h3>
+      <tr>
+        <th>Projet</th>
+        <th> Nombre de Votants</th>
+        <th> Fermeture</th>
+        <th> Résultat </th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @groupes.each do |groupe| %>
+          <% if groupe.createur == utilisateur_courant && groupe.date_fin <  DateTime.now %>
+              <tr>
+                <td><%= link_to groupe.titre, groupe %></td>
+                <td><%= groupe.votes_total %></td>
+                <td><%=  l groupe.date_fin, format: :long %></td>
+                <td>
+                  <% if groupe.victoire? %>
+                      Accepté
+                  <% else %>
+                      Rejeté
+                  <% end %>
+                </td>
+              </tr>
+          <%end%>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
