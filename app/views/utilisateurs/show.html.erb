@@ -7,11 +7,7 @@
 <div class="row">
 
   <div class="col-md-4">
-    <% if @utilisateur.image? %>
-        <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
-    <% else %>
-        <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
-    <% end %>
+    <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: @utilisateur} %>
   </div>
 
   <div class="col-md-4">
@@ -62,9 +58,7 @@
           <% @utilisateur.tous_delegues.each do |d| %>
               <tr>
                 <td>
-                  <% if d[:receveur].image? %>
-                      <%= image_tag(d[:receveur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
-                  <% end %>
+                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:receveur]} %>
                 </td>
                 <td><%= link_to d[:receveur].nom_complet, utilisateur_path(d[:receveur]) %></td>
                 <td><%= d[:categorie].nom %></td>
@@ -86,9 +80,7 @@
           <% @utilisateur.tous_delegueurs.each do |d| %>
               <tr>
                 <td>
-                  <% if d[:donneur].image? %>
-                      <%= image_tag(d[:donneur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
-                  <% end %>
+                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:donneur]} %>
                 </td>
                 <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
                 <td><%= d[:categorie].nom %></td>
