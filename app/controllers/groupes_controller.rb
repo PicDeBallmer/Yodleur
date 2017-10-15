@@ -30,18 +30,18 @@ class GroupesController < ApplicationController
     #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.pelo? %>
   end
 
-  # def index_mygroups
-  #   if params[:search]
-  #     @groupes = Groupe.search(params[:search]).order(created_at: :desc)
-  #   else
-  #     @groupes = Groupe.order(created_at: :desc)
-  #   end
-  #   @titre_liste1 = 'Référendums en cours'
-  #   #@condition1 = <% if groupe.createur == utilisateur_courant && groupe.date_fin > DateTime.now + (2/24.0) %>
-  #   @titre_liste2 = 'Référendums terminés'
-  #   #@condition2 = <% if groupe.createur == utilisateur_courant && groupe.date_fin <  DateTime.now +  (2/24.0) %>
-  # end
-  #
+  def index_mygroups
+    if params[:search]
+      @groupes = Groupe.search(params[:search]).order(created_at: :desc)
+    else
+      @groupes = Groupe.order(created_at: :desc)
+    end
+    @titre_liste1 = 'Référendums en cours'
+    #@condition1 = <% if groupe.createur == utilisateur_courant && groupe.date_fin > DateTime.now + (2/24.0) %>
+    @titre_liste2 = 'Référendums terminés'
+    #@condition2 = <% if groupe.createur == utilisateur_courant && groupe.date_fin <  DateTime.now +  (2/24.0) %>
+  end
+
   # # A SUPPRIMER SI TOUT MARCHE
   # #alias_method :index_outdated, :index
   # #alias_method :index_mygroups, :index
