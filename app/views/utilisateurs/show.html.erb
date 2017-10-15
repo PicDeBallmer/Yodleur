@@ -80,7 +80,11 @@
           <% @utilisateur.tous_delegueurs.each do |d| %>
               <tr>
                 <td>
-                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:donneur]} %>
+                  <% if @utilisateur.image? %>
+                      <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
+                  <% else %>
+                      <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
+                  <% end %>
                 </td>
                 <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
                 <td><%= d[:categorie].nom %></td>

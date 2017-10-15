@@ -2,11 +2,14 @@ class Groupe < ApplicationRecord
 
   has_many :sujets, :dependent => :delete_all
 
-  # belongs_to :categorie_principale,
-  #            class_name: 'Categorie'
-  # belongs_to :categorie_secondaire,
-  #            class_name: 'Categorie'
-  # belongs_to :lieu
+  belongs_to :categorie_principale,
+             class_name: 'Categorie'
+  belongs_to :categorie_secondaire,
+             class_name: 'Categorie',
+             optional: true
+  belongs_to :lieu
+
+  validates_presence_of :categorie_principale
 
   # Recherche de tous les groupes dont les sujets ou les catégories sont en rapport
   def self.search(search)

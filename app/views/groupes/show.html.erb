@@ -1,0 +1,94 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'graphe' %>
+  <%= stylesheet_link_tag 'graphe' %>
+<% end %>
+
+<% unless notice.nil? %>
+  <p id="notice"><%= notice %></p>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h1><%= @groupe.titre %></h1>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-6">
+
+    <p>
+      Catégorie principale : <%= @groupe.categorie_principale.nom %>
+    </p>
+    <p>
+      Catégorie secondaire :
+      <% if @groupe.categorie_secondaire==nil%>
+        <i>Aucune</i>
+      <% else %>
+        <%= @groupe.categorie_secondaire.nom %>
+      <% end %>
+    </p>
+    <p>
+      Vote ouvert jusqu'au : <%= @groupe.date_fin.strftime("%d/%m/%Y à %Hh%M") %>
+    </p>
+    <p>
+      <% if @groupe.temps_restant.to_i > 0 %>
+        Il reste <%= @groupe.temps_restant %> avant la fin du vote !
+      <% else %>
+        Vote terminé !
+      <% end %>
+    </p>
+
+
+    <% @groupe.sujets.each do |sujet| %>
+    <div class="well">
+      <p class="pull-right">
+        <%= pluralize(sujet.utilisateurs.length, 'vote') %>
+      </p>
+
+      <p>
+        <%= link_to sujet.titre, sujet %>
+        <% if sujet.parent==nil %>
+          <i  style="color:#ff69b4">→Référendum racine</i>
+        <% end %>
+
+      </p>
+      <p>
+        <%= sujet.description_courte %><%= link_to 'voir plus', sujet %>
+      </p>
+      <% if sujet.utilisateurs.exists?(utilisateur_courant) %>
+        <p>
+          <i>Vous avez déjà voté pour ce référendum.</i>
+        </p>
+      <% end %>
+    </div>
+
+
+
+    <% end %>
+
+
+
+  </div>
+
+  <div class="col-lg-6 text-center">
+    <h2>Idéosphère</h2>
+
+    <% if @groupe.sujets.length > 1 %>
+      <div id="graphe">
+      </div>
+      <script type="text/javascript">
+        graphe("#graphe");
+      </script>
+    <% else %>
+      Désolé ! Il faut au moins un amendement pour voir l'idéosphère.
+    <% end %>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <%= link_to 'Retour à la liste des projets', groupes_path, class: 'btn btn-default' %>
+  </div>
+</div>
