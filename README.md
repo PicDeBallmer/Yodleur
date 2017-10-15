@@ -1,8 +1,19 @@
 # README
 
+##How to launch docker project
+```
+docker-compose up
+docker-compose run web rake db:create
+docker-compose run web rake db:schema:load
+docker-compose run web rake db:seed
+```
+
+Access site on localhost:3000
+
 ##How to setup project
 ###Setup project with
 ```
+rake db:create
 rake db:schema:load
 rake db:seed
 rails server
