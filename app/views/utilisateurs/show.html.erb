@@ -7,7 +7,11 @@
 <div class="row">
 
   <div class="col-md-4">
-    <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: @utilisateur} %>
+    <% if @utilisateur.image? %>
+        <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
+    <% else %>
+        <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
+    <% end %>
   </div>
 
   <div class="col-md-4">
@@ -80,11 +84,7 @@
           <% @utilisateur.tous_delegueurs.each do |d| %>
               <tr>
                 <td>
-                  <% if @utilisateur.image? %>
-                      <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
-                  <% else %>
-                      <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
-                  <% end %>
+                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:donneur]} %>
                 </td>
                 <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
                 <td><%= d[:categorie].nom %></td>
