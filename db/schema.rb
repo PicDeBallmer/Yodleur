@@ -40,14 +40,14 @@ ActiveRecord::Schema.define(version: 20171012132426) do
     t.integer  "categorie_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-    t.integer  "rec_profondeur"
-    t.integer  "rec_racine_id"
+    # t.integer  "rec_profondeur"
+    # t.integer  "rec_racine_id"
   end
 
   add_index "delegations", ["categorie_id"], name: "index_delegations_on_categorie_id"
   add_index "delegations", ["donneur_id", "categorie_id"], name: "index_delegations_on_donneur_id_and_categorie_id", unique: true
   add_index "delegations", ["donneur_id"], name: "index_delegations_on_donneur_id"
-  add_index "delegations", ["rec_racine_id"], name: "index_delegations_on_rec_racine_id"
+  # add_index "delegations", ["rec_racine_id"], name: "index_delegations_on_rec_racine_id"
   add_index "delegations", ["receveur_id"], name: "index_delegations_on_receveur_id"
 
   create_table "groupes", force: :cascade do |t|

@@ -1,0 +1,18 @@
+<h1>
+  Délégations courantes
+</h1>
+
+<ul>
+  <% mes_delegations_courantes.each do |delegation| %>
+    <li>
+      receveur : <%= delegation.receveur.nom %>, catégorie : <%= delegation.categorie.nom %>
+      <%= button_to 'Supprimer',{controller: 'delegations',
+                                 action: 'destroy',
+                                 id: delegation.id}, method: :delete %>
+    </li>
+  <% end %>
+</ul>
+
+<% unless categories_delegables.empty? %>
+  <%= link_to 'Créer une délégation', controller: :delegations, action: :new %>
+<% end %>

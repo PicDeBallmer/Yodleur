@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="text-center">Profil d'utilisateur</h2>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-4">
+    <% if @utilisateur.image? %>
+        <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
+    <% else %>
+        <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+
+    <h2>
+      <%= @utilisateur.nom_complet %>
+      <% if @utilisateur.admin? %>
+          <small class="text-uppercase">Administrateur</small>
+      <% end %>
+    </h2>
+
+    <dl>
+
+      <% unless @utilisateur.date_de_naissance.nil? %>
+          <dt>Date de naissance</dt>
+          <dd><%= l @utilisateur.date_de_naissance, format: :long %></dd>
+      <% end %>
+
+      <% unless @utilisateur.lieu.nil? %>
+          <dt>Lieu de résidence</dt>
+          <dd><%= @utilisateur.lieu.nom %></dd>
+      <% end %>
+    </dl>
+
+
+    <% if utilisateur_courant_ou_admin?(@utilisateur) %>
+        <%= link_to 'Modifier le profil', edit_utilisateur_path(@utilisateur), class: 'btn btn-default btn-lg' %>
+    <% end %>
+
+  </div>
+
+  <div class='col-md-4'>
+
+
+    <%= link_to 'Créer une délégation', {controller: :delegations, action: :new}, class: 'btn btn-default btn-lg' %>
+
+    <% if utilisateur_courant?(@utilisateur) %>
+        <p>Je délègue à d'autres citoyens :</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>Délégué</th>
+            <th>Catégorie</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @utilisateur.tous_delegues.each do |d| %>
+              <tr>
+                <td>
+                  <% if d[:receveur].image? %>
+                      <%= image_tag(d[:receveur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+                  <% end %>
+                </td>
+                <td><%= link_to d[:receveur].nom_complet, utilisateur_path(d[:receveur]) %></td>
+                <td><%= d[:categorie].nom %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <p>D'autres citoyens me délèguent :</p>
+        <table class="table">
+          <thead>
+          <tr>
+            <th></th>
+            <th>Délégueur</th>
+            <th>Catégorie</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @utilisateur.tous_delegueurs.each do |d| %>
+              <tr>
+                <td>
+                  <% if d[:donneur].image? %>
+                      <%= image_tag(d[:donneur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+                  <% end %>
+                </td>
+                <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
+                <td><%= d[:categorie].nom %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+    <% end %>
+
+  </div>
+
+
+
+</div>

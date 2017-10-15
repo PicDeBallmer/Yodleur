@@ -48,6 +48,10 @@ class Utilisateur < ApplicationRecord
     :encrypt_password
   }
 
+  def nom_complet
+    [prenom.to_s, nom.upcase.to_s].delete_if{ |s| s.empty? }.join(' ')
+  end
+
   def admin?
     UtilisateursHelper.droits_egal?(:admin, droits)
   end
@@ -58,6 +62,40 @@ class Utilisateur < ApplicationRecord
 
   def en_attente?
     UtilisateursHelper.droits_egal?(:en_attente, droits)
+  end
+
+  # Est-ce que l'utisateur a donné son vote pour la +categorie+
+  def delegation_donnee?(categorie_id)
+    self.delegations_donnees.exists?(categorie_id: categorie_id)
+  end
+
+  # Nombre de votes possédés par l'utilisateur pour la +catégorie+
+  def votes_disponibles(categorie_id)
+    if delegation_donnee? categorie_id
+      # Il a donné une délégation : il n'a plus de vote
+      0
+    else
+      # Sinon, c'est le nombre de délégations avec la racine == self + 1 (le sien)
+      delegations_accumulees.where(categorie_id: categorie_id).count + 1
+    end
+  end
+
+  # Les utilisateurs qui ont donné leur vote (directement ou pas) à +self+
+  def delegueurs(categorie_id)
+    if delegation_donnee? categorie_id
+      Utilisateur.none
+    else
+      Utilisateur.where(id: delegations_accumulees
+                                .where(categorie_id: categorie_id).pluck(:donneur_id))
+    end
+  end
+
+  def tous_delegueurs
+    delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
+  end
+
+  def tous_delegues
+    delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
   end
 
   private

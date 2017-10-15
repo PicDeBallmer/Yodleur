@@ -1,0 +1,16 @@
+<%= form_for :delegation, url: delegations_path do |f| %>
+
+  <%= render 'layouts/erreurs', erreurs: @delegation.errors %>
+  <p>
+    <%= f.label :receveur_id %>
+    <%= f.select :receveur_id, utilisateurs_delegables.pluck(:nom, :id) %>
+  </p>
+  <p>
+    <%= f.label 'Catégorie' %>
+    <%= f.select :categorie_id, categories_delegables.pluck(:nom, :id) %>
+  </p>
+  <p>
+    <%= f.submit 'Déléguer' %>
+  </p>
+<% end %>
+

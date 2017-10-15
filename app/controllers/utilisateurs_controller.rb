@@ -1,30 +1,29 @@
 class UtilisateursController < ApplicationController
 
-  # def index
-  #   @utilisateurs = Utilisateur.all
-  #   if params[:search]
-  #     @utilisateurs = Utilisateur.search(params[:search]).order('created_at DESC')
-  #   else
-  #     @utilisateurs = Utilisateur.order('created_at DESC')
-  #   end
-  # end
+  def index
+    @utilisateurs = Utilisateur.all
+    if params[:search]
+      @utilisateurs = Utilisateur.search(params[:search]).order('created_at DESC')
+    else
+      @utilisateurs = Utilisateur.order('created_at DESC')
+    end
+  end
 
-  #
-  # def show
-  #   @utilisateur = Utilisateur.find_by_id(params[:id])
-  # end
+  def show
+    @utilisateur = Utilisateur.find_by_id(params[:id])
+  end
 
   def new
     @utilisateur = Utilisateur.new
   end
 
-  # def edit
-  #   @utilisateur = Utilisateur.find_by_id(params[:id])
-  #
-  #   if !utilisateur_courant_ou_admin?(@utilisateur)
-  #     forbidden
-  #   end
-  # end
+  def edit
+    @utilisateur = Utilisateur.find_by_id(params[:id])
+
+    if !utilisateur_courant_ou_admin?(@utilisateur)
+      forbidden
+    end
+  end
 
   def create
     @utilisateur = Utilisateur.new(utilisateur_params)
@@ -51,24 +50,24 @@ class UtilisateursController < ApplicationController
     end
   end
 
-  # def update
-  #   @utilisateur = Utilisateur.find_by_id(params[:id])
-  #
-  #   # Interdit si l'utilisateur essaye de mettre à jour des droits sans être administrateur...
-  #   if params.include? :droits && !utilisateur_courant.admin?
-  #     forbidden
-  #   end
-  #
-  #   lieu = Lieu.find_by_id(params[:utilisateur][:lieu_id])
-  #   @utilisateur.lieu = lieu
-  #
-  #   if @utilisateur.update(utilisateur_params)
-  #     redirect_to @utilisateur
-  #   else
-  #     render 'edit'
-  #   end
-  # end
-  #
+  def update
+    @utilisateur = Utilisateur.find_by_id(params[:id])
+
+    # Interdit si l'utilisateur essaye de mettre à jour des droits sans être administrateur...
+    if params.include? :droits && !utilisateur_courant.admin?
+      forbidden
+    end
+
+    lieu = Lieu.find_by_id(params[:utilisateur][:lieu_id])
+    @utilisateur.lieu = lieu
+
+    if @utilisateur.update(utilisateur_params)
+      redirect_to @utilisateur
+    else
+      render 'edit'
+    end
+  end
+
   # def verifier_mairie
   #   @utilisateur = Utilisateur.find_by_id(params[:id])
   #   if params[:cle].to_i == @utilisateur.generer_cle
@@ -81,7 +80,7 @@ class UtilisateursController < ApplicationController
   #     forbidden
   #   end
   # end
-  #
+
   private
   def utilisateur_params
     params.require(:utilisateur).permit(
