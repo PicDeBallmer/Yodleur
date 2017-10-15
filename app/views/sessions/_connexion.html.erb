@@ -1,6 +1,6 @@
 <% if logged_in? %>
   <div class="pull-left">
-    <% if utilisateur_courant.image.url != nil %>
+    <% if utilisateur_courant.image? %>
         <%= image_tag(utilisateur_courant.image.url, size: '32', class: 'img-responsive center-block img-circle') %>
     <% else %>
         <%= image_tag('fraaaanz.png', size: '32', class: 'img-responsive center-block img-circle') %>

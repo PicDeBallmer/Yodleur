@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-lg-12 text-center">
+    <h2>Modification du profil</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+
+    <%= form_for(@utilisateur, html: { multipart: true }) do |f| %>
+
+        <%= render 'layouts/erreurs', erreurs: @utilisateur.errors %>
+
+        <div class="form-group">
+          <%= f.label :lieu_id, 'Lieu de résidence' %>
+          <%= f.select :lieu_id, LieuxHelper.lieux_select, { include_blank: true }, { class: 'form-control' } %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :image, 'Image de profil' %>
+          <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
+          <p class="help-block">
+            L'image ne doit pas dépasser 5Mo et sera redimensionnée en 200x200 pixels.
+          </p>
+        </div>
+
+        <% if utilisateur_courant.admin? %>
+            <div class="form-group">
+              <%= f.label :droits %>
+              <%= f.select :droits, UtilisateursHelper.droits_select, { include_blank: true }, { class: "form-control" } %>
+            </div>
+        <% end %>
+
+        <%= link_to 'Retour', utilisateur_path(utilisateur_courant), class: 'btn btn-default' %>
+
+        <%= f.submit 'Mettre à jour', class: 'btn btn-primary' %>
+
+    <% end %>
+
+  </div>
+</div>
