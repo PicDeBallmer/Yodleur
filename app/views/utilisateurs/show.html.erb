@@ -64,6 +64,8 @@
                 <td>
                   <% if d[:receveur].image? %>
                       <%= image_tag(d[:receveur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+                  <% else %>
+                      <%= image_tag('fraaaanz.png', size: '32', class: 'img-responsive center-block img-circle') %>
                   <% end %>
                 </td>
                 <td><%= link_to d[:receveur].nom_complet, utilisateur_path(d[:receveur]) %></td>
@@ -88,6 +90,8 @@
                 <td>
                   <% if d[:donneur].image? %>
                       <%= image_tag(d[:donneur].image.url, size: '32', class: 'img-responsive center-block img-circle') %>
+                  <% else %>
+                      <%= image_tag('fraaaanz.png', size: '32', class: 'img-responsive center-block img-circle') %>
                   <% end %>
                 </td>
                 <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
