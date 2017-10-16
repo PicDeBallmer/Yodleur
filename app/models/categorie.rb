@@ -18,7 +18,7 @@ class Categorie < ApplicationRecord
 
   # Si le texte correspond au nom de la catégorie exact
   def self.search(texte)
-    where("nom LIKE ?", "%#{texte}%")
+    where("lower(nom) LIKE ?", "%#{texte.downcase}%")
   end
 
 end
