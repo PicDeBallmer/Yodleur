@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+  
+<body>
+<h1>Nouvelle demande d'inscription sur Yodleur</h1>
+<p>
+  L'utilisateur <%= @utilisateur.nom_complet %> a souhaité s'inscrire sur Yodleur.
+  Merci de vérifier sa présence sur les listes électorales et cliquez sur ce lien pour
+  valider son inscription : <%= link_to 'Valider l\'inscription',
+                                        verifier_mairie_url(@utilisateur.id, @utilisateur.generer_cle, protocol: 'https') %>.
+</p>
+  <p>Bonne journée, et à bientôt sur Yodleur !</p>
+  
+</body>
+</html>

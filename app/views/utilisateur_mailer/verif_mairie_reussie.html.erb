@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+</head>
+  
+<body>
+<h1>Votre inscription sur Yodleur a été validée !</h1>
+  <p>
+    Bravo, la mairie de votre lieu de résidence a bien accepté votre inscription sur Yodleur.
+    Vous pouvez maintenant vous connecter avec votre email et votre mot de passe en suivant le
+    lien suivant :
+    <%= link_to 'Se connecter',
+                log_in_url(protocol: 'https') %>
+  </p>
+  <p>Bonne journée, et à bientôt sur Yodleur !</p>
+  
+</body>
+</html>

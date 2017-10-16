@@ -42,28 +42,24 @@ class GroupesController < ApplicationController
     #@condition2 = <% if groupe.createur == utilisateur_courant && groupe.date_fin <  DateTime.now +  (2/24.0) %>
   end
 
-  # # A SUPPRIMER SI TOUT MARCHE
-  # #alias_method :index_outdated, :index
-  # #alias_method :index_mygroups, :index
-  #
-  # # GET /groupes/1
-  # def show
-  #   @groupe = Groupe.find_by_id(params[:id])
-  # end
-  #
-  # # GET /groupes/new
-  # def new
-  #   @groupe = Groupe.new
-  #   @sujet = Sujet.new
-  #   # redirect_to controller: sujets_url, action: new #, :titre => titre
-  #   # redirect_to use_route: 'sujets/new'
-  # end
-  #
-  # # GET /groupes/1/edit
+  # GET /groupes/1
+  def show
+    @groupe = Groupe.find_by_id(params[:id])
+  end
+
+  # GET /groupes/new
+  def new
+    @groupe = Groupe.new
+    @sujet = Sujet.new
+    # redirect_to controller: sujets_url, action: new #, :titre => titre
+    # redirect_to use_route: 'sujets/new'
+  end
+
+  # GET /groupes/1/edit
   # def edit
   # end
-  #
-  # # POST /groupes
+
+  # POST /groupes
   # def create
   #   @groupe = Groupe.new(groupe_params)
   #   if @groupe.save
@@ -84,7 +80,7 @@ class GroupesController < ApplicationController
   #     render :new
   #   end
   # end
-  #
+
   # def destroy
   #   groupe = Groupe.find_by_id(params[:id])
   #   unless groupe.nil?
@@ -92,7 +88,7 @@ class GroupesController < ApplicationController
   #   end
   #   redirect_to :groupes
   # end
-  #
+
   # def graphe
   #   @groupe = Groupe.find(params[:id])
   #   respond_to do |format|
@@ -113,7 +109,7 @@ class GroupesController < ApplicationController
   #     }
   #   end
   # end
-  #
+
   # private
   # def groupe_params
   #   params.require(:groupe).permit(:titre,
@@ -122,7 +118,7 @@ class GroupesController < ApplicationController
   #                                  :categorie_principale_id,
   #                                  :categorie_secondaire_id)
   # end
-  #
+
   # def sujet_params
   #   params.require(:sujet).permit(:description)
   # end

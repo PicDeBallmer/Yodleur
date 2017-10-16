@@ -7,7 +7,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-lieus = Lieu.create(
+lieus = Lieu.create!(
     [{nom: 'Villeurbanne'},
      {nom: 'Lyon 1'},
      {nom: 'Lyon 2'},
@@ -16,7 +16,7 @@ lieus = Lieu.create(
 
 p "Created #{Lieu.count} lieus"
 
-categories = Categorie.create(
+categories = Categorie.create!(
     [{nom: 'Sport'},
      {nom: 'Culture'},
      {nom: 'Numérique'},
@@ -37,11 +37,15 @@ if Rails.env == 'development'
 
   p "Created #{Utilisateur.count} utilisateurs"
 
-  groupes = Groupe.create(
-      [{titre: 'Améliorer le WiFi dans les salles de TP', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
-       {titre: 'Installer une tireuse à bière en Gaston Berger', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
-       {titre: 'Planter des arbres sur les humas', date_debut: DateTime.now, date_fin: DateTime.tomorrow},
-       {titre: 'Organiser un concert de Barbiche', date_debut: DateTime.yesterday, date_fin: DateTime.now}])
+  groupes = Groupe.create!(
+      [{titre: 'Améliorer le WiFi dans les salles de TP', date_debut: DateTime.now, date_fin: DateTime.tomorrow,
+        categorie_principale: categories[2], lieu: lieus[0]},
+       {titre: 'Installer une tireuse à bière en Gaston Berger', date_debut: DateTime.now, date_fin: DateTime.tomorrow,
+        categorie_principale: categories[5], lieu: lieus[0]},
+       {titre: 'Planter des arbres sur les humas', date_debut: DateTime.now, date_fin: DateTime.tomorrow,
+        categorie_principale: categories[3], lieu: lieus[0]},
+       {titre: 'Organiser un concert de Barbiche', date_debut: DateTime.yesterday, date_fin: DateTime.now,
+        categorie_principale: categories[1], lieu: lieus[0]}])
 
   p "Created #{Groupe.count} groupes"
 
@@ -62,7 +66,7 @@ if Rails.env == 'development'
 
   p "Created #{Sujet.count} sujets"
 
-  mot_nuages = MotNuage.create(
+  mot_nuages = MotNuage.create!(
       [{mot: 'Barbiche', poids: 20},
        {mot: 'INSA', poids: 10}])
 
