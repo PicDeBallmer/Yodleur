@@ -13,10 +13,15 @@ Access site on localhost:3000
 ## How to setup project
 ### Setup project with
 ```
-rake db:create
-rake db:schema:load
-rake db:seed
+rails db:create
+rails db:schema:load
+rails db:seed
 rails server
+```
+
+### Laucnh tests
+```
+rails test
 ```
 
 ### Install gems with
