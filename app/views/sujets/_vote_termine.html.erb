@@ -1,0 +1,22 @@
+<div>
+  <p>
+    <h3>Résultats</h3>
+
+    <p style="font-size: 200%;">
+      <% if @sujet.votes_pour > @sujet.votes_contre %>
+        La communauté a voté pour !
+      <% elsif @sujet.votes_pour < @sujet.votes_contre %>
+        La communauté a voté contre.
+      <% elsif @sujet.votes_pour == @sujet.votes_contre %>
+        Le vote a obtenu une égalité.
+      <% end %>
+    </p>
+
+    <ul>
+      <li><%= @sujet.votes_pour %> utilisateurs ont voté pour.</li>
+      <li><%= @sujet.votes_contre %> utilisateurs ont voté contre.</li>
+      <li><%= @sujet.votes_blancs %> utilisateurs ont voté blanc.</li>
+    </ul>
+
+  </p>
+</div>

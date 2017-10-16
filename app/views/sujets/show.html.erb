@@ -1,0 +1,168 @@
+<div class="row">
+  <div class="col-sm-2 vcenter">
+    <%= link_to 'Retour à l\'idéospère', groupe_path(@sujet.groupe_id), class: 'btn btn-default btn-sm' %>
+  </div>
+  <div class="col-sm-8 text-center vcenter">
+    <h1><%= @sujet.titre %></h1>
+  </div>
+</div>
+
+<% unless notice.nil? %>
+  <p id="notice text-center"><%= notice %></p>
+<% end %>
+
+<% unless @sujet.parent.nil? %>
+  <p class="bg-info" style="padding: 15px;">
+    Ce référendum est un amendement du référendum <%= link_to @sujet.parent.titre, sujet_path(@sujet.parent) %> proposé par <%= link_to @sujet.parent.createur.nom_complet, utilisateur_path(@sujet.parent.createur) %>.
+  </p>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-6">
+
+    <div>
+      <h2>Description</h2>
+      <p>
+        <%= @sujet.description %>
+      </p>
+    </div>
+
+    <div>
+      <h2>Informations</h2>
+
+      <p>
+        Proposé par <strong><%= link_to @sujet.createur.nom_complet, utilisateur_path(@sujet.createur) %></strong> le <strong><%= l @sujet.created_at, format: :long %></strong>.
+      </p>
+
+      <p>
+        <strong><%= @sujet.votants.count %></strong> personnes ont voté sur ce sujet.
+      </p>
+
+      <h2>Progression du vote</h2>
+
+      <div>
+
+        <p>Ouverture : <strong><%= l @sujet.groupe.date_debut, format: :long %></strong></p>
+        <p>Fermeture : <strong><%= l @sujet.groupe.date_fin, format: :long %></strong></p>
+        <p>Temps restant : <strong><%= @sujet.groupe.temps_restant %></strong></p>
+
+        <div>
+          <div class="progress">
+            <div class="progress-bar" style="width:<%= @sujet.groupe.pourcentage_restant %>%">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <% if @sujet.groupe.termine? %>
+      <%= render 'vote_termine' %>
+    <% else %>
+      <%= render 'vote_en_cours' %>
+    <% end %>
+
+  </div>
+
+  <div class="col-lg-6">
+
+    <h2>Commentaires</h2>
+
+    <% @sujet.commentaires.each do |commentaire| %>
+      <%= render(commentaire) %>
+    <% end %>
+
+    <% if logged_in? %>
+      <h3>Ajouter un commentaire</h3>
+
+      <%= form_for([@sujet, @sujet.commentaires.build]) do |f| %>
+        <%= f.text_area :texte, placeholder: 'Votre commentaire...', class: 'form-control' %>
+        <%= f.submit 'Écrire un commentaire', class: 'btn btn-default' %>
+      <% end %>
+
+    <% else %>
+      <p>Vous devez être connecté(e) pour publier un commentaire. </p>
+    <% end %>
+
+    
+  <% if @Colere != "ERROR" %>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Colère</strong>
+      </div>
+      <div class="col-lg-2">
+        <%= (@Colere.to_f*1000).to_i.to_f/10 %>%
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @Colere.to_f*100 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @Colere.to_f*100 %>%; background: #c82222">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Degout</strong>
+      </div>
+      <div class="col-lg-2">
+        <%= (@Degout.to_f*1000).to_i.to_f/10 %>%
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @Degout.to_f*100 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @Degout.to_f*100 %>%; background-color: #194923">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Peur</strong>
+      </div>
+      <div class="col-lg-2">
+        <%= (@Peur.to_f*1000).to_i.to_f/10 %>%
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @Peur.to_f*100 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @Peur.to_f*100 %>%; background-color: #723183">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Joie</strong>
+      </div>
+      <div class="col-lg-2">
+        <%= (@Joie.to_f*1000).to_i.to_f/10 %>%
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @Joie.to_f*100 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @Joie.to_f*100 %>%; background-color: #f1a013">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <strong>Tristesse</strong>
+      </div>
+      <div class="col-lg-2">
+        <%= (@Tristesse.to_f*1000).to_i.to_f/10 %>%
+      </div>
+      <div class="col-lg-8">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @Tristesse.to_f*100 %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @Tristesse.to_f*100 %>%; background-color: #303e89">
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <% end %>
+
+  </div>
+</div>

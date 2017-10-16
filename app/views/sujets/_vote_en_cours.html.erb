@@ -1,0 +1,42 @@
+<div class="">
+  <% if @sujet.utilisateurs.exists?(utilisateur_courant) %>
+
+    <div class="text center">
+      Vous avez déjà voté pour ce référendum.
+    </div>
+
+  <% else %>
+
+    <div class="text-center">
+      <% if logged_in? %>
+
+        <%= form_for @sujet, url: {action: 'incremente_votes_pour'} do |f| %>
+        <%= f.submit('Je vote Pour') %>
+        <% end %>
+
+        <%= form_for @sujet, url: {action: 'incremente_votes_contre'} do |f| %>
+        <%= f.submit('Je vote Contre') %>
+        <% end %>
+
+        <%= form_for @sujet, url: {action: 'incremente_votes_blancs'} do |f| %>
+        <%= f.submit('Je vote Blanc') %>
+        <% end %>
+
+      <% else %>
+        Vous devez être connecté pour pouvoir voter.
+      <% end %>
+
+    </div>
+
+  <% end %>
+
+  <div>
+    <div class="bg-info clearfix" style="padding: 15px;">
+      Vous pouvez également proposer un amendement à cette idée. Un amendement est une modification de l'idée actuelle, qui vous semble mieux adaptée pour répondre au problème. L'amendement aura son propre vote et son propre fil de commentaire, et se terminera en même temps que le groupe auquel il est associé.
+      <div class="pull-right" style="margin: 10px;">
+        <%= link_to 'Créer un amendement', { action: :new, parent_id: @sujet.id }, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+
+</div>

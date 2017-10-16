@@ -1,0 +1,39 @@
+<h2>Modification des lieux</h2>
+<p align="center">
+<table>
+  <thead>
+    <tr>
+      <td>
+        Lieu
+      </td>
+      <td>
+        Actions
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lieux.each do |lieu| %>
+      <tr>
+        <td>
+          <%= lieu.nom %>
+        </td>
+        <td>
+          <%= link_to 'Supprimer', lieux_path(lieu), method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</p>
+
+<%= form_for :lieu do |f| %>
+  <p>
+  <%= f.label :nom, 'Nouveau lieu' %>
+  </p>
+  <p>
+  <%= f.text_field :nom %>
+  </p>
+  <p>
+  <%= f.submit 'Valider', class: 'btn-custom' %>
+  </p>
+<% end %>

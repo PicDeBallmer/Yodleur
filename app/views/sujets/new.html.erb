@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-2 vcenter">
+    <%= link_to 'Retour au sujet', sujet_path(@sujet_parent), class: 'btn btn-default btn-sm' %>
+  </div>
+  <div class="col-sm-8 text-center vcenter">
+    <h1>Nouvel amendement pour le sujet <%= link_to @sujet_parent.titre, sujet_path(@sujet_parent) %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <%= form_for @sujet do |f| %>
+      <%= render 'layouts/erreurs', erreurs: @sujet.errors %>
+
+      <div class="form-group">
+        <%= f.label :titre %>
+        <%= f.text_field :titre, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+
+      <%= f.hidden_field :parent_id, value: @sujet_parent.id %>
+
+      <%= f.submit 'Publier', class: 'btn btn-primary btn-lg' %>
+    <% end %>
+  </div>
+</div>
