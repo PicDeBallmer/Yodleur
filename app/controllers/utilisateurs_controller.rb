@@ -1,4 +1,5 @@
 class UtilisateursController < ApplicationController
+  include UtilisateursHelper
 
   def index
     @utilisateurs = Utilisateur.all
@@ -11,6 +12,8 @@ class UtilisateursController < ApplicationController
 
   def show
     @utilisateur = Utilisateur.find_by_id(params[:id])
+    @tous_delegues = tous_delegues(@utilisateur)
+    @tous_delegueurs = tous_delegueurs(@utilisateur)
   end
 
   def new
@@ -31,9 +34,9 @@ class UtilisateursController < ApplicationController
     # Si production : On envoie le mail à la mairie, on attend le retour, etc.
     # Si développement : On inscrit le pélo automatiquement
     if Rails.env == 'production'
-      @utilisateur.droits = UtilisateursHelper.droits[:en_attente]
+      @utilisateur.droits = "en_attente"
     elsif Rails.env == 'development'
-      @utilisateur.droits = Utilisateur.any? ? UtilisateursHelper.droits[:pelo] : UtilisateursHelper.droits[:admin]
+      @utilisateur.droits = Utilisateur.any? ? "pelo" : "admin"
     end
 
     if @utilisateur.save
