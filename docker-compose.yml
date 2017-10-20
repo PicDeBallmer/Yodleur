@@ -20,5 +20,5 @@ services:
       - db
 volumes:
   database:
-  # TODO remove when pictures persisted in db
+  # TODO: remove when pictures persisted in db
   web_persist:
