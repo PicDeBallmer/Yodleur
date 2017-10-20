@@ -13,12 +13,12 @@ module UtilisateursHelper
     droits[cible] == droit
   end
 
-  def tous_delegueurs
-    delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
+  def tous_delegueurs utilisateur
+    utilisateur.delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
   end
 
-  def tous_delegues
-    delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
+  def tous_delegues utilisateur
+    utilisateur.delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
   end
 
   # def self.droits_select

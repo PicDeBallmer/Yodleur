@@ -59,7 +59,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @utilisateur.tous_delegues.each do |d| %>
+          <% @tous_delegues.each do |d| %>
               <tr>
                 <td>
                   <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:receveur]} %>
@@ -81,7 +81,7 @@
           </tr>
           </thead>
           <tbody>
-          <% @utilisateur.tous_delegueurs.each do |d| %>
+          <% @tous_delegueurs.each do |d| %>
               <tr>
                 <td>
                   <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:donneur]} %>
