@@ -1,16 +1,24 @@
 module UtilisateursHelper
 
-  def self.droits
-    {
-        :pelo => 0, # pélo = citoyen normal
-        :elu => 1,
-        :admin => 2,
-        :en_attente => 3
-    }
-  end
+  # def self.droits
+  #   {
+  #       :pelo => 0, # pélo = citoyen normal
+  #       :elu => 1,
+  #       :admin => 2,
+  #       :en_attente => 3
+  #   }
+  # end
 
   def self.droits_egal?(cible, droit)
     droits[cible] == droit
+  end
+
+  def tous_delegueurs
+    delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
+  end
+
+  def tous_delegues
+    delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
   end
 
   # def self.droits_select

@@ -9,3 +9,23 @@
 #
 #two: {}
 # column: value
+
+villeurbanne:
+  id: 0
+  nom: 'Villeurbanne'
+
+lyon1:
+  id: 1
+  nom: 'Lyon 1'
+
+lyon2:
+  id: 2
+  nom: 'Lyon 2'
+
+lyon3:
+  id: 3
+  nom: 'Lyon 3'
+
+lyon4:
+  id: 4
+  nom: 'Lyon 4'

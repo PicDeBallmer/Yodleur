@@ -91,7 +91,7 @@ class SujetsController < ApplicationController
       else
         cat_id = @sujet.groupe.categorie_principale_id
         @sujet.update_attributes(type_vote => @sujet[type_vote] +
-            utilisateur_courant.votes_disponibles(cat_id))
+            utilisateur_courant.votes_disponibles_par_categorie(cat_id))
         @sujet.votants.append(utilisateur_courant.delegueurs_et_moi(cat_id))
         render 'show'
       end

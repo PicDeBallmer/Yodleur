@@ -23,7 +23,7 @@ class Delegation < ApplicationRecord
       errors.add(:receveur_id, ' ne peut pas être le donneur')
     end
 
-    if Utilisateur.find_by_id(donneur_id).delegueurs(categorie_id).exists?(receveur_id)
+    if Utilisateur.find_by_id(donneur_id).delegueurs_par_categorie(categorie_id).exists?(receveur_id)
       errors.add(:receveur_id, ' a déjà donné son vote (directement ou non) au donneur')
     end
   end
