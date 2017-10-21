@@ -1,14 +1,4 @@
 module UtilisateursHelper
-
-  # def self.droits
-  #   {
-  #       :pelo => 0, # pélo = citoyen normal
-  #       :elu => 1,
-  #       :admin => 2,
-  #       :en_attente => 3
-  #   }
-  # end
-
   def self.droits_egal?(cible, droit)
     droits[cible] == droit
   end
