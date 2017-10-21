@@ -41,34 +41,28 @@
 
 
     <% @groupe.sujets.each do |sujet| %>
-    <div class="well">
-      <p class="pull-right">
-        <%= pluralize(sujet.utilisateurs.length, 'vote') %>
-      </p>
-
-      <p>
-        <%= link_to sujet.titre, sujet %>
-        <% if sujet.parent==nil %>
-          <i  style="color:#ff69b4">→Référendum racine</i>
-        <% end %>
-
-      </p>
-      <p>
-        <%= sujet.description_courte %><%= link_to 'voir plus', sujet %>
-      </p>
-      <% if sujet.utilisateurs.exists?(utilisateur_courant) %>
-        <p>
-          <i>Vous avez déjà voté pour ce référendum.</i>
+      <div class="well">
+        <p class="pull-right">
+          <%= pluralize(sujet.utilisateurs.length, 'vote') %>
         </p>
-      <% end %>
-    </div>
 
+        <p>
+          <%= link_to sujet.titre, sujet %>
+          <% if sujet.parent==nil %>
+            <i  style="color:#ff69b4">→Référendum racine</i>
+          <% end %>
 
-
+        </p>
+        <p>
+          <%= sujet.description_courte %><%= link_to 'voir plus', sujet %>
+        </p>
+        <% if sujet.utilisateurs.exists?(utilisateur_courant) %>
+          <p>
+            <i>Vous avez déjà voté pour ce référendum.</i>
+          </p>
+        <% end %>
+      </div>
     <% end %>
-
-
-
   </div>
 
   <div class="col-lg-6 text-center">

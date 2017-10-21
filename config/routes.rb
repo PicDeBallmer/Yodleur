@@ -42,4 +42,7 @@ Rails.application.routes.draw do
   patch '/sujets/:id/incremente_votes_contre' => 'sujets#incremente_votes_contre', as: :incremente_votes_contre
   patch '/sujets/:id/incremente_votes_blancs' => 'sujets#incremente_votes_blancs', as: :increase_votes_blancs
 
+  # graphe
+  get 'groupes/:id/graphe' => 'groupes#graphe', :as => 'graphe'
+
 end
