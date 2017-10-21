@@ -32,48 +32,15 @@
 <div class="row">
 
   <div class="col-lg-6">
-    <h3>Référendums institutionnels</h3>
-    <% @groupes.each do |groupe| %>
-        <% if groupe.date_fin > DateTime.now  && !groupe.createur.citoyen? %>
-            <div class="well">
-              <p class="pull-right">
-                <%= pluralize(groupe.votes_total, 'vote') %> (total)
-              </p>
-              <p>
-                <%= link_to groupe.titre, groupe %>
-              </p>
-              <p>
-                <%= groupe.description_courte %><%= link_to 'voir plus', groupe %>
-              </p>
-              <p>
-                <i>Il reste <%= groupe.temps_restant %> pour voter !</i>
-              </p>
-            </div>
-        <% end %>
-    <% end %>
+    <%= render partial: "groupes/referendum_en_cours", :locals =>
+        { :groupes => @groupes_institutionnels,
+          :titre_liste => @titre_liste1 } %>
   </div>
 
-
   <div class="col-lg-6">
-    <h3>Référendums citoyens</h3>
-    <% @groupes.each do |groupe| %>
-        <% if groupe.date_fin > DateTime.now  && groupe.createur.citoyen? %>
-            <div class="well">
-              <p class="pull-right">
-                <%= pluralize(groupe.votes_total, 'vote') %> (total)
-              </p>
-              <p>
-                <%= link_to groupe.titre, groupe %>
-              </p>
-              <p>
-                <%= groupe.description_courte %><%= link_to 'voir plus', groupe %>
-              </p>
-              <p>
-                <i>Il reste <%= groupe.temps_restant %> pour voter !</i>
-              </p>
-            </div>
-        <% end %>
-    <% end %>
+    <%= render partial: "groupes/referendum_en_cours", :locals =>
+        { :groupes => @groupes_citoyens,
+          :titre_liste => @titre_liste2 } %>
   </div>
 
 </div>

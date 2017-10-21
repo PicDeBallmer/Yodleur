@@ -41,7 +41,12 @@
 
     <div class="form-group">
       <%= f.label :lieu_id , "Lieu de résidence" %><br>
-      <%= f.select :lieu_id, LieuxHelper.lieux_select, { include_blank: true }, class: 'form-control' %>
+      <%= f.select :lieu_id,
+                   options_for_select(
+                       Lieu.all.collect { |l| [l.nom, l.id] },
+                       :selected => @utilisateur.lieu_id),
+                   {},
+                   class: 'form-control' %>
     </div>
 
     <div class="form-group">
