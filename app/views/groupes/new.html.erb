@@ -26,6 +26,16 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :lieu_id %><br>
+    <%= f.select :lieu_id,
+                 options_for_select(
+                     Lieu.all.collect { |l| [l.nom, l.id] },
+                     :selected => @groupe.lieu_id),
+                 {},
+                 class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :categorie_principale_id, 'Catégorie principale' %>
     <%= f.select :categorie_principale_id, Categorie.all.pluck(:nom, :id), {}, { class: 'form-control' } %>
   </div>

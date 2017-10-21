@@ -59,8 +59,8 @@ class GroupesController < ApplicationController
   # POST /groupes
   def create
     @groupe = Groupe.new(groupe_params)
+    @sujet = Sujet.new(sujet_params)
     if @groupe.save
-      @sujet = Sujet.new(sujet_params)
       @sujet.createur = utilisateur_courant
       @sujet.votes_pour = 0
       @sujet.votes_blancs = 0
@@ -115,6 +115,7 @@ class GroupesController < ApplicationController
   def groupe_params
     params.require(:groupe).permit(
       :titre,
+      :lieu_id,
       :date_debut,
       :date_fin,
       :categorie_principale_id,
