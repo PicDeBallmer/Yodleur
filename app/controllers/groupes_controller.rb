@@ -12,10 +12,10 @@ class GroupesController < ApplicationController
     else
       @groupes = Groupe.order(created_at: :desc)
     end
-    @titre_liste1 = 'Référendum institutionnel'
-    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.pelo? %>
-    @titre_liste2 = 'Référendum citoyen'
-    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.pelo? %>
+    @titre_liste1 = 'Référendums institutionnels'
+    @titre_liste2 = 'Référendums citoyens'
+    @groupes_institutionnels = @groupes.select { |groupe| groupe.date_fin > DateTime.now && !groupe.createur.citoyen? }
+    @groupes_citoyens = @groupes.select { |groupe| groupe.date_fin > DateTime.now && groupe.createur.citoyen? }
   end
 
   def index_outdated
@@ -25,9 +25,11 @@ class GroupesController < ApplicationController
       @groupes = Groupe.order(created_at: :desc)
     end
     @titre_liste1 = 'Référendum institutionnel outdated'
-    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.pelo? %>
+    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.citoyen? %>
     @titre_liste2 = 'Référendum citoyen outdated'
-    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.pelo? %>
+    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.citoyen? %>
+    @groupes_institutionnels = @groupes.select { |groupe| groupe.date_fin > DateTime.now && !groupe.createur.citoyen? }
+    @groupes_citoyens = @groupes.select { |groupe| groupe.date_fin > DateTime.now && groupe.createur.citoyen? }
   end
 
   def index_mygroups
@@ -54,31 +56,30 @@ class GroupesController < ApplicationController
     # redirect_to controller: sujets_url, action: new #, :titre => titre
     # redirect_to use_route: 'sujets/new'
   end
+  # POST /groupes
+  def create
+    @groupe = Groupe.new(groupe_params)
+    @sujet = Sujet.new(sujet_params)
+    if @groupe.save
+      @sujet.createur = utilisateur_courant
+      @sujet.votes_pour = 0
+      @sujet.votes_blancs = 0
+      @sujet.votes_contre = 0
+      @sujet.groupe = @groupe
+      @sujet.titre = @groupe.titre
+      if @sujet.save
+        redirect_to @groupe, notice: 'Groupe was successfully created.'
+      else
+        @groupe.destroy
+        render :new
+      end
+    else
+      render :new
+    end
+  end
 
   # GET /groupes/1/edit
   # def edit
-  # end
-
-  # POST /groupes
-  # def create
-  #   @groupe = Groupe.new(groupe_params)
-  #   if @groupe.save
-  #     @sujet = Sujet.new(sujet_params)
-  #     @sujet.createur = utilisateur_courant
-  #     @sujet.votes_pour = 0
-  #     @sujet.votes_blancs = 0
-  #     @sujet.votes_contre = 0
-  #     @sujet.groupe = @groupe
-  #     @sujet.titre = @groupe.titre
-  #     if @sujet.save
-  #       redirect_to @groupe, notice: 'Groupe was successfully created.'
-  #     else
-  #       @groupe.destroy
-  #       render :new
-  #     end
-  #   else
-  #     render :new
-  #   end
   # end
 
   # def destroy
@@ -110,17 +111,19 @@ class GroupesController < ApplicationController
   #   end
   # end
 
-  # private
-  # def groupe_params
-  #   params.require(:groupe).permit(:titre,
-  #                                  :date_debut,
-  #                                  :date_fin,
-  #                                  :categorie_principale_id,
-  #                                  :categorie_secondaire_id)
-  # end
+  private
+  def groupe_params
+    params.require(:groupe).permit(
+      :titre,
+      :lieu_id,
+      :date_debut,
+      :date_fin,
+      :categorie_principale_id,
+      :categorie_secondaire_id)
+  end
 
-  # def sujet_params
-  #   params.require(:sujet).permit(:description)
-  # end
+  def sujet_params
+    params.require(:sujet).permit(:description)
+  end
 
 end

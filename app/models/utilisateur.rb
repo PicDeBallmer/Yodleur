@@ -9,11 +9,9 @@ class Utilisateur < ApplicationRecord
            class_name: 'Delegation',
            foreign_key: 'donneur_id'
   has_many :delegueurs,
-           # class_name: 'Utilisateur',
            :through => :delegations_recues,
            :source => :receveur
   has_many :delegues,
-           # class_name: 'Utilisateur',
            :through => :delegations_donnees,
            :source => :donneur
   has_many :sujets_crees,
@@ -29,7 +27,7 @@ class Utilisateur < ApplicationRecord
                         length: { maximum: 255 },
                         format: { with: VALID_EMAIL_REGEX },
                         uniqueness: { case_sensitive: false }
-  validates_length_of :password, :minimum => 8
+  validates_length_of :password, :minimum => 8, on: :create
 
   # Image de profil
   mount_uploader :image, ImageUploader
@@ -37,7 +35,7 @@ class Utilisateur < ApplicationRecord
 
   before_validation :before_validation
 
-  enum droits: [ :pelo, :elu, :admin, :en_attente ]
+  enum droit: [:citoyen, :elu, :administrateur, :en_attente ]
 
   def nom_complet
     [prenom.to_s, nom.upcase.to_s].delete_if{ |s| s.empty? }.join(' ')
@@ -64,10 +62,18 @@ class Utilisateur < ApplicationRecord
     end
   end
 
+  def self.search(search)
+    Utilisateur.where("lower(nom) LIKE ?", "%#{search.downcase}%").
+      or(Utilisateur.where("lower(prenom) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(mail) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(concat_ws(' ', prenom, nom)) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(concat_ws(' ', nom, prenom)) LIKE ?", "%#{search.downcase}%"))
+  end
+
   private
   def verification_taille_image
     if image.size > 5.megabytes
-      errors.add(:image, 'ne doit pas exéder 5Mo')
+      errors.add(:image, 'ne doit pas excéder 5Mo')
     end
   end
 

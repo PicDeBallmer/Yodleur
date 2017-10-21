@@ -1,0 +1,19 @@
+<h3>
+  <% titre_liste %>
+</h3>
+<% groupes.each do |groupe| %>
+    <div class="well">
+      <p class="pull-right">
+        <%= pluralize(groupe.votes_total, 'vote') %> (total)
+      </p>
+      <p>
+        <%= link_to groupe.titre, groupe %>
+      </p>
+      <p>
+        <%= groupe.description_courte %><%= link_to 'voir plus', groupe %>
+      </p>
+      <p>
+        <i>Il reste <%= groupe.temps_restant %> pour voter !</i>
+      </p>
+    </div>
+<% end %>

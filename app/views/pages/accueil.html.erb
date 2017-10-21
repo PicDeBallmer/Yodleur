@@ -23,7 +23,7 @@
       <p>Votre navigateur ne supporte pas le nuage de mots</p>
     </canvas>
     <ul id="liste_mots">
-      <% liste_mots_pour_nuage.each do |mot| %>
+      <% MotNuage.all.each do |mot| %>
         <li><%= link_to mot.mot, groupes_path(search: mot.mot), data: {poids: mot.poids} %></li>
       <% end %>
     </ul>

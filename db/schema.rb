@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20171012132426) do
     t.string   "nom"
     t.string   "prenom"
     t.string   "mail"
-    t.integer  "droits"
+    t.integer "droit"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "password_digest"

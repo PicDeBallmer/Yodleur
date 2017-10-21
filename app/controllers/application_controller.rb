@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     end
 
     def require_admin
-      unless admin?
+      unless administrateur?
         forbidden
       end
     end

@@ -17,8 +17,8 @@ module SessionsHelper
     @utilisateur_courant = nil
   end
 
-  def admin?
-    logged_in? && utilisateur_courant.admin?
+  def administrateur?
+    logged_in? && utilisateur_courant.administrateur?
   end
 
   def utilisateur_courant?(utilisateur)
@@ -26,7 +26,7 @@ module SessionsHelper
   end
 
   def utilisateur_courant_ou_admin?(utilisateur)
-    utilisateur_courant?(utilisateur) || admin?
+    utilisateur_courant?(utilisateur) || administrateur?
   end
 
 end

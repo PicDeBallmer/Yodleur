@@ -31,9 +31,9 @@ if Rails.env == 'development'
 
   utilisateurs = Utilisateur.create!(
       [
-          {droits: 0, prenom: "Frodo", nom: "Sacquet", mail:"frodo.sacquet@shire.me", lieu: lieus[0], password: "admin1"},
-          {droits: 1, prenom: "Peregrin", nom: "Touc", mail:"peregrin.touc@shire.me", lieu: lieus[0], password: "admin1"},
-          {droits: 2, prenom: "Meriadoc", nom: "Brandebouc", mail:"meriadoc.brandebouc@shire.me", lieu: lieus[0], password: "admin1"}])
+          {droit: 0, prenom: "Frodo", nom: "Sacquet", mail:"frodo.sacquet@shire.me", lieu: lieus[0], password: "adminadmin"},
+          {droit: 1, prenom: "Peregrin", nom: "Touc", mail:"peregrin.touc@shire.me", lieu: lieus[0], password: "adminadmin"},
+          {droit: 2, prenom: "Meriadoc", nom: "Brandebouc", mail:"meriadoc.brandebouc@shire.me", lieu: lieus[0], password: "adminadmin"}])
 
   p "Created #{Utilisateur.count} utilisateurs"
 

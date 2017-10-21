@@ -30,25 +30,25 @@ class Groupe < ApplicationRecord
     self.sujets.first.createur
   end
 
-  # def en_cours?
-  #   DateTime.now.between? self.date_debut, self.date_fin
-  # end
+  def en_cours?
+    DateTime.now.between? self.date_debut, self.date_fin
+  end
 
   # def self.en_cours
   #   where{(date_debut <= DateTime.now) & (date_fin >= DateTime.now)}
   # end
 
-  # def pourcentage_restant
-  #   termine = date_fin - date_debut
-  #   en_cours = (Time.current - date_debut)
-  #   pourcentage = 100 - ((en_cours * 100) / termine).to_i
-  #   if pourcentage > 100
-  #     pourcentage = 100
-  #   elsif pourcentage < 0
-  #     pourcentage = 0
-  #   end
-  #   pourcentage
-  # end
+  def pourcentage_restant
+    termine = date_fin - date_debut
+    en_cours = (Time.current - date_debut)
+    pourcentage = 100 - ((en_cours * 100) / termine).to_i
+    if pourcentage > 100
+      pourcentage = 100
+    elsif pourcentage < 0
+      pourcentage = 0
+    end
+    pourcentage
+  end
 
   def temps_restant
     t = (self.date_fin - Time.current).to_i
@@ -62,9 +62,9 @@ class Groupe < ApplicationRecord
     end
   end
 
-  # def termine?
-  #   date_fin < Time.current
-  # end
+  def termine?
+    date_fin < Time.current
+  end
 
   def description_courte
     self.sujets.first.description_courte

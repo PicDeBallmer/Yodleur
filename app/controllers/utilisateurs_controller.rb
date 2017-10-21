@@ -12,20 +12,10 @@ class UtilisateursController < ApplicationController
 
   def show
     @utilisateur = Utilisateur.find_by_id(params[:id])
-    @tous_delegues = tous_delegues(@utilisateur)
-    @tous_delegueurs = tous_delegueurs(@utilisateur)
   end
 
   def new
     @utilisateur = Utilisateur.new
-  end
-
-  def edit
-    @utilisateur = Utilisateur.find_by_id(params[:id])
-
-    if !utilisateur_courant_ou_admin?(@utilisateur)
-      forbidden
-    end
   end
 
   def create
@@ -34,9 +24,9 @@ class UtilisateursController < ApplicationController
     # Si production : On envoie le mail à la mairie, on attend le retour, etc.
     # Si développement : On inscrit le pélo automatiquement
     if Rails.env == 'production'
-      @utilisateur.droits = "en_attente"
+      @utilisateur.droit = "en_attente"
     elsif Rails.env == 'development'
-      @utilisateur.droits = Utilisateur.any? ? "pelo" : "admin"
+      @utilisateur.droit = Utilisateur.any? ? "citoyen" : "administrateur"
     end
 
     if @utilisateur.save
@@ -53,31 +43,47 @@ class UtilisateursController < ApplicationController
     end
   end
 
-  def update
+  def edit
     @utilisateur = Utilisateur.find_by_id(params[:id])
 
-    # Interdit si l'utilisateur essaye de mettre à jour des droits sans être administrateur...
-    if params.include? :droits && !utilisateur_courant.admin?
-      forbidden
-    end
+    # if !utilisateur_courant_ou_admin?(@utilisateur)
+    #   forbidden
+    # end
+  end
 
-    lieu = Lieu.find_by_id(params[:utilisateur][:lieu_id])
-    @utilisateur.lieu = lieu
-
-    if @utilisateur.update(utilisateur_params)
+  def update
+    @utilisateur = Utilisateur.find_by_id(params[:id])
+    if @utilisateur.update_attributes(utilisateur_params)
       redirect_to @utilisateur
     else
       render 'edit'
     end
+    # @utilisateur = Utilisateur.find_by_id(params[:id])
+    #
+    # # Interdit si l'utilisateur essaye de mettre à jour des droit sans être administrateur...
+    # if params.include? :droit && !utilisateur_courant.administrateur?
+    #   forbidden
+    # end
+    #
+    # lieu = Lieu.find_by_id(params[:utilisateur][:lieu_id])
+    # @utilisateur.lieu = lieu
+    #
+    # # if @utilisateur.update(utilisateur_params)
+    # #   redirect_to @utilisateur
+    # # else
+    # #   render 'edit'
+    # # end
   end
+
+
 
   # def verifier_mairie
   #   @utilisateur = Utilisateur.find_by_id(params[:id])
   #   if params[:cle].to_i == @utilisateur.generer_cle
   #
   #     # Le premier utilisateur créé est administrateur
-  #     #@utilisateur.droits = Utilisateur.any? ? UtilisateursHelper.droits[:pelo] : UtilisateursHelper.droits[:admin]
-  #     Utilisateur.update(@utilisateur.id, droits: Utilisateur.any? ? UtilisateursHelper.droits[:pelo] : UtilisateursHelper.droits[:admin])
+  #     #@utilisateur.droit = Utilisateur.any? ? UtilisateursHelper.droit[:citoyen] : UtilisateursHelper.droit[:administrateur]
+  #     Utilisateur.update(@utilisateur.id, droit: Utilisateur.any? ? UtilisateursHelper.droit[:citoyen] : UtilisateursHelper.droit[:administrateur])
   #     UtilisateurMailer.verif_mairie_reussie(@utilisateur).deliver_now
   #   else
   #     forbidden
@@ -97,7 +103,7 @@ class UtilisateursController < ApplicationController
         :image,
         :password,
         :password_confirmation,
-        :droits
+        :droit
     )
   end
 

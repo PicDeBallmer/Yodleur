@@ -31,4 +31,15 @@ Rails.application.routes.draw do
   get 'log_in' => 'sessions#new', :as => 'log_in'
   get 'sign_up' => 'utilisateurs#new', :as => 'sign_up'
 
+  # administration
+  get 'admin' => 'admin#index'
+
+  # routes de sujet
+  get '/ammendements/:id/new' => 'sujets#nouvel_ammendement', as: :nouvel_ammendement
+  post '/ammendements' => 'sujets#creer_ammendement', as: :creer_ammendement
+
+  patch '/sujets/:id/incremente_votes_pour' => 'sujets#incremente_votes_pour', as: :incremente_votes_pour
+  patch '/sujets/:id/incremente_votes_contre' => 'sujets#incremente_votes_contre', as: :incremente_votes_contre
+  patch '/sujets/:id/incremente_votes_blancs' => 'sujets#incremente_votes_blancs', as: :increase_votes_blancs
+
 end
