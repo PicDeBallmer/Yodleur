@@ -13,7 +13,12 @@
 
         <div class="form-group">
           <%= f.label :lieu_id, 'Lieu de résidence' %>
-          <%= f.select :lieu_id, LieuxHelper.lieux_select, { include_blank: true }, { class: 'form-control' } %>
+          <%= f.select :lieu_id,
+              options_for_select(
+                  Lieu.all.collect { |l| [l.nom, l.id] },
+                  :selected => @utilisateur.lieu),
+              {},
+              { class: 'form-control' } %>
         </div>
 
         <div class="form-group">
@@ -24,10 +29,15 @@
           </p>
         </div>
 
-        <% if utilisateur_courant.admin? %>
+        <% if utilisateur_courant.administrateur? %>
             <div class="form-group">
               <%= f.label :droit %>
-              <%= f.select :droit, @liste_droits, {include_blank: true }, {class: "form-control" } %>
+              <%= f.select :droit,
+                  options_for_select(
+                      Utilisateur.droits.collect { |s| [s[0].humanize, s[0]] },
+                      :selected => @utilisateur.droit),
+                  {},
+                  {class: 'form-control' } %>
             </div>
         <% end %>
 

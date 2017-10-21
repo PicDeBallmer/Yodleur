@@ -7,18 +7,14 @@
 <div class="row">
 
   <div class="col-md-4">
-    <% if @utilisateur.image? %>
-        <%= image_tag(@utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
-    <% else %>
-        <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
-    <% end %>
+    <%= render partial: "utilisateurs/photo_de_profil", :locals => { :utilisateur => @utilisateur } %>
   </div>
 
   <div class="col-md-4">
 
     <h2>
       <%= @utilisateur.nom_complet %>
-      <% if @utilisateur.admin? %>
+      <% if @utilisateur.administrateur? %>
           <small class="text-uppercase">Administrateur</small>
       <% end %>
     </h2>
@@ -59,13 +55,13 @@
           </tr>
           </thead>
           <tbody>
-          <% @tous_delegues.each do |d| %>
+          <% @utilisateur.delegations_donnees.each do |d| %>
               <tr>
                 <td>
-                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:receveur]} %>
+                  <%= render partial: "utilisateurs/thumbnail", utilisateur: d.receveur %>
                 </td>
-                <td><%= link_to d[:receveur].nom_complet, utilisateur_path(d[:receveur]) %></td>
-                <td><%= d[:categorie].nom %></td>
+                <td><%= link_to d.receveur.nom_complet, utilisateur_path(d.receveur) %></td>
+                <td><%= d.categorie.nom %></td>
               </tr>
           <% end %>
           </tbody>
@@ -81,13 +77,13 @@
           </tr>
           </thead>
           <tbody>
-          <% @tous_delegueurs.each do |d| %>
+          <% @utilisateur.delegations_recues.each do |d| %>
               <tr>
                 <td>
-                  <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: d[:donneur]} %>
+                  <%= render partial: "utilisateurs/thumbnail", utilisateur: d.donneur %>
                 </td>
-                <td><%= link_to d[:donneur].nom_complet, utilisateur_path(d[:donneur]) %></td>
-                <td><%= d[:categorie].nom %></td>
+                <td><%= link_to d.donneur.nom_complet, utilisateur_path(d.donneur) %></td>
+                <td><%= d.categorie.nom %></td>
               </tr>
           <% end %>
           </tbody>

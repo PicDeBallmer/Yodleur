@@ -37,7 +37,7 @@
             <td><%= utilisateur.prenom %></td>
             <td><%= utilisateur.mail %></td>
             <td>
-              <%= render "utilisateurs/droits", utilisateur: utilisateur %>
+              <%= utilisateur.droit.humanize %>
             </td>
             <td><%= link_to 'Voir', utilisateur_path(utilisateur) %></td>
           </tr>

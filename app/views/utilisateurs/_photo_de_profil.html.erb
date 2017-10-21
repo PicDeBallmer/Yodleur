@@ -1,0 +1,5 @@
+<% if utilisateur.image? %>
+    <%= image_tag(utilisateur.image.url, class: 'img-responsive center-block img-circle') %>
+<% else %>
+    <%= image_tag('fraaaanz.png', class: 'img-responsive center-block') %>
+<% end %>

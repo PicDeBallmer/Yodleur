@@ -3,20 +3,6 @@ module UtilisateursHelper
   #   droit[cible] == droit
   # end
 
-  def tous_delegueurs utilisateur
-    utilisateur.delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
-  end
-
-  def tous_delegues utilisateur
-    utilisateur.delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
-  end
-
-  def droits_select utilisateur
-    # Convertit la liste de droit dans la format [[:pelo, 0], ...]
-    # Utilisé pour les <select>
-    Utilisateur.droits.to_a
-  end
-
   def self.civilites
     {
         0 => '',

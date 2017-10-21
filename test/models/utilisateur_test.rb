@@ -21,7 +21,7 @@ class UtilisateurTest < ActiveSupport::TestCase
   test "droit enum" do
     assert utilisateurs(:jeanlasalle).pelo?
     assert_not utilisateurs(:jeanlasalle).elu?
-    assert_not utilisateurs(:jeanlasalle).admin?
+    assert_not utilisateurs(:jeanlasalle).administrateur?
     assert_not utilisateurs(:jeanlasalle).en_attente?
   end
 

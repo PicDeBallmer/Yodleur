@@ -29,7 +29,7 @@ class Utilisateur < ApplicationRecord
                         length: { maximum: 255 },
                         format: { with: VALID_EMAIL_REGEX },
                         uniqueness: { case_sensitive: false }
-  validates_length_of :password, :minimum => 8
+  validates_length_of :password, :minimum => 8, on: :create
 
   # Image de profil
   mount_uploader :image, ImageUploader
@@ -37,7 +37,7 @@ class Utilisateur < ApplicationRecord
 
   before_validation :before_validation
 
-  enum droit: [:pelo, :elu, :admin, :en_attente ]
+  enum droit: [:citoyen, :elu, :administrateur, :en_attente ]
 
   def nom_complet
     [prenom.to_s, nom.upcase.to_s].delete_if{ |s| s.empty? }.join(' ')

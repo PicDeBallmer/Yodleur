@@ -13,9 +13,9 @@ class GroupesController < ApplicationController
       @groupes = Groupe.order(created_at: :desc)
     end
     @titre_liste1 = 'Référendum institutionnel'
-    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.pelo? %>
+    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.citoyen? %>
     @titre_liste2 = 'Référendum citoyen'
-    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.pelo? %>
+    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.citoyen? %>
   end
 
   def index_outdated
@@ -25,9 +25,9 @@ class GroupesController < ApplicationController
       @groupes = Groupe.order(created_at: :desc)
     end
     @titre_liste1 = 'Référendum institutionnel outdated'
-    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.pelo? %>
+    #@condition1 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && !groupe.createur.citoyen? %>
     @titre_liste2 = 'Référendum citoyen outdated'
-    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.pelo? %>
+    #@condition2 = <% if groupe.date_fin > DateTime.now +  (2/24.0) && groupe.createur.citoyen? %>
   end
 
   def index_mygroups
