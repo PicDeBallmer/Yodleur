@@ -39,26 +39,9 @@ class Utilisateur < ApplicationRecord
 
   enum droits: [ :pelo, :elu, :admin, :en_attente ]
 
-  # before_save {
-  #   self.mail = mail.downcase
-  #   :encrypt_password
-  # }
-
   def nom_complet
     [prenom.to_s, nom.upcase.to_s].delete_if{ |s| s.empty? }.join(' ')
   end
-
-  # def admin?
-  #   UtilisateursHelper.droits_egal?(:admin, droits)
-  # end
-  #
-  # def pelo?
-  #   UtilisateursHelper.droits_egal?(:pelo, droits)
-  # end
-  #
-  # def en_attente?
-  #   UtilisateursHelper.droits_egal?(:en_attente, droits)
-  # end
 
   # Est-ce que l'utisateur a donné son vote pour la +categorie+
   def delegation_donnee? categorie_id
