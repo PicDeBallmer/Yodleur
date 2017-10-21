@@ -9,15 +9,15 @@ class Sujet < ApplicationRecord
 
   belongs_to :groupe
 
-  # has_many :fils,
-  #          class_name: 'Sujet',
-  #          foreign_key: 'parent_id'
-
   has_and_belongs_to_many :utilisateurs,
                           class_name: 'Utilisateur',
                           join_table: 'votes'
 
-  # has_many :commentaires
+  has_many :fils,
+           class_name: 'Sujet',
+           foreign_key: 'parent_id'
+
+  has_many :commentaires
 
   alias_method :votants, :utilisateurs
 
@@ -86,8 +86,8 @@ class Sujet < ApplicationRecord
   end
 
   def self.search(search)
-    Sujet.where("titre LIKE ?", "%#{search}%")
-    .or(Sujet.where("description LIKE ?", "%#{search}%"))
+    Sujet.where("titre LIKE ?", "%#{search}%").
+      or(Sujet.where("description LIKE ?", "%#{search}%"))
   end
 
   # private
