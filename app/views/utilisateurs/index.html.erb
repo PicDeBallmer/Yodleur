@@ -31,23 +31,14 @@
       <% @utilisateurs.each do |utilisateur| %>
           <tr>
             <td>
-              <%= render partial: "utilisateurs/thumbnail", locals: {utilisateur: utilisateur} %>
+              <%= render "utilisateurs/thumbnail", utilisateur: utilisateur %>
             </td>
             <td><%= utilisateur.nom %></td>
             <td><%= utilisateur.prenom %></td>
             <td><%= utilisateur.mail %></td>
-
-            <% if utilisateur.droits == 2 %>
-                <td><%= "Administrateur" %></td>
-
-            <% elsif utilisateur.droits == 1 %>
-                <td><%= "Élu" %></td>
-
-            <%else%>
-                <td><%= "Citoyen" %></td>
-
-            <%end%>
-
+            <td>
+              <%= render "utilisateurs/droits", utilisateur: utilisateur %>
+            </td>
             <td><%= link_to 'Voir', utilisateur_path(utilisateur) %></td>
           </tr>
       <% end %>

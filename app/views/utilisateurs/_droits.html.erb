@@ -1,0 +1,9 @@
+<% if utilisateur.pelo? %>
+    Citoyen
+<% elsif utilisateur.elu?%>
+    Élu
+<% elsif utilisateur.admin?%>
+    Administrateur
+<% elsif utilisateur.en_attente?%>
+    En Attente
+<% end %>
