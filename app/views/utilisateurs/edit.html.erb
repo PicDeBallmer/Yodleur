@@ -16,7 +16,7 @@
           <%= f.select :lieu_id,
               options_for_select(
                   Lieu.all.collect { |l| [l.nom, l.id] },
-                  :selected => @utilisateur.lieu),
+                  :selected => @utilisateur.lieu_id),
               {},
               { class: 'form-control' } %>
         </div>

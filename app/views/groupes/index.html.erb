@@ -34,7 +34,7 @@
   <div class="col-lg-6">
     <h3>Référendums institutionnels</h3>
     <% @groupes.each do |groupe| %>
-        <% if groupe.date_fin > DateTime.now  && !groupe.createur.pelo? %>
+        <% if groupe.date_fin > DateTime.now  && !groupe.createur.citoyen? %>
             <div class="well">
               <p class="pull-right">
                 <%= pluralize(groupe.votes_total, 'vote') %> (total)
@@ -57,7 +57,7 @@
   <div class="col-lg-6">
     <h3>Référendums citoyens</h3>
     <% @groupes.each do |groupe| %>
-        <% if groupe.date_fin > DateTime.now  && groupe.createur.pelo? %>
+        <% if groupe.date_fin > DateTime.now  && groupe.createur.citoyen? %>
             <div class="well">
               <p class="pull-right">
                 <%= pluralize(groupe.votes_total, 'vote') %> (total)
