@@ -64,6 +64,12 @@ class Utilisateur < ApplicationRecord
     end
   end
 
+  def self.search(search)
+    Utilisateur.where("lower(nom) LIKE ?", "%#{search.downcase}%").
+        or(Utilisateur.where("lower(prenom) LIKE ?", "%#{search.downcase}%")).
+        or(Utilisateur.where("lower(mail) LIKE ?", "%#{search.downcase}%"))
+  end
+
   private
   def verification_taille_image
     if image.size > 5.megabytes
