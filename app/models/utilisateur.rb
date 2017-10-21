@@ -16,12 +16,6 @@ class Utilisateur < ApplicationRecord
            # class_name: 'Utilisateur',
            :through => :delegations_donnees,
            :source => :donneur
-  # has_many :categories_recues,
-  #          class_name: 'Categorie',
-  #          :through => :delegations_recues
-  # has_many :categories_donnees,
-  #          class_name: 'Categorie',
-  #          :through => :delegations_donnees
   has_many :sujets_crees,
            class_name: 'Sujet'
   has_many :commentaires
@@ -35,9 +29,7 @@ class Utilisateur < ApplicationRecord
                         length: { maximum: 255 },
                         format: { with: VALID_EMAIL_REGEX },
                         uniqueness: { case_sensitive: false }
-
-  # validates_presence_of :password, on: :create
-  # validates :password, presence: true, length: { minimum: 6 }, allow_blank: true # allow_blank pour autoriser la mise à jour (voir Aurélien pour plus d'infos, c'est une maxi magouille)
+  validates_length_of :password, :minimum => 8
 
   # Image de profil
   mount_uploader :image, ImageUploader
