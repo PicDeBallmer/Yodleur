@@ -42,14 +42,14 @@ class UtilisateurTest < ActiveSupport::TestCase
   end
 
   test "search" do
-    assert_equal 0,Utilisateur.search("Test").count, "Search Test"
-    assert_equal 1,Utilisateur.search("La").count, "Search La"
-    assert_equal 1,Utilisateur.search("la").count, "Search la"
-    assert_equal 1,Utilisateur.search("Lasalle").count, "Search Lasalle"
-    assert_equal 1,Utilisateur.search("lasalle").count, "Search lasalle"
-    assert_equal 1,Utilisateur.search("Jean").count, "Search Jean"
-    assert_equal 1,Utilisateur.search("jean").count, "Search jean"
-    assert_equal 1,Utilisateur.search("Jean Lasalle").count, "Search Jean Lasalle"
-    assert_equal 1,Utilisateur.search("Lasalle Jean").count, "Search Lasalle Jean"
+    assert_equal 0, Utilisateur.search("Test").count, "Search Test"
+    assert_equal 1, Utilisateur.search("La").count, "Search La"
+    assert_equal 1, Utilisateur.search("la").count, "Search la"
+    assert_equal 1, Utilisateur.search("Lasalle").count, "Search Lasalle"
+    assert_equal 1, Utilisateur.search("lasalle").count, "Search lasalle"
+    assert_equal 1, Utilisateur.search("Jean").count, "Search Jean"
+    assert_equal 1, Utilisateur.search("jean").count, "Search jean"
+    assert_equal 1, Utilisateur.search("Jean Lasalle").count, "Search Jean Lasalle"
+    assert_equal 1, Utilisateur.search("Lasalle Jean").count, "Search Lasalle Jean"
   end
 end
