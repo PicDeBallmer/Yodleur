@@ -73,7 +73,7 @@ class Utilisateur < ApplicationRecord
   private
   def verification_taille_image
     if image.size > 5.megabytes
-      errors.add(:image, 'ne doit pas exéder 5Mo')
+      errors.add(:image, 'ne doit pas excéder 5Mo')
     end
   end
 
