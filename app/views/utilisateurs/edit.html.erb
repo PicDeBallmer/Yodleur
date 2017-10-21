@@ -26,8 +26,8 @@
 
         <% if utilisateur_courant.admin? %>
             <div class="form-group">
-              <%= f.label :droits %>
-              <%= f.select :droits, UtilisateursHelper.droits_select, { include_blank: true }, { class: "form-control" } %>
+              <%= f.label :droit %>
+              <%= f.select :droit, @liste_droits, {include_blank: true }, {class: "form-control" } %>
             </div>
         <% end %>
 

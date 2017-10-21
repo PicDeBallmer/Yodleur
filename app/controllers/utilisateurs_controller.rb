@@ -23,6 +23,10 @@ class UtilisateursController < ApplicationController
   def edit
     @utilisateur = Utilisateur.find_by_id(params[:id])
 
+    if @utilisateur.admin?
+      @liste_droits = droits_select(@utilisateur)
+    end
+
     if !utilisateur_courant_ou_admin?(@utilisateur)
       forbidden
     end
@@ -34,9 +38,9 @@ class UtilisateursController < ApplicationController
     # Si production : On envoie le mail à la mairie, on attend le retour, etc.
     # Si développement : On inscrit le pélo automatiquement
     if Rails.env == 'production'
-      @utilisateur.droits = "en_attente"
+      @utilisateur.droit = "en_attente"
     elsif Rails.env == 'development'
-      @utilisateur.droits = Utilisateur.any? ? "pelo" : "admin"
+      @utilisateur.droit = Utilisateur.any? ? "pelo" : "admin"
     end
 
     if @utilisateur.save
@@ -56,8 +60,8 @@ class UtilisateursController < ApplicationController
   def update
     @utilisateur = Utilisateur.find_by_id(params[:id])
 
-    # Interdit si l'utilisateur essaye de mettre à jour des droits sans être administrateur...
-    if params.include? :droits && !utilisateur_courant.admin?
+    # Interdit si l'utilisateur essaye de mettre à jour des droit sans être administrateur...
+    if params.include? :droit && !utilisateur_courant.admin?
       forbidden
     end
 
@@ -76,8 +80,8 @@ class UtilisateursController < ApplicationController
   #   if params[:cle].to_i == @utilisateur.generer_cle
   #
   #     # Le premier utilisateur créé est administrateur
-  #     #@utilisateur.droits = Utilisateur.any? ? UtilisateursHelper.droits[:pelo] : UtilisateursHelper.droits[:admin]
-  #     Utilisateur.update(@utilisateur.id, droits: Utilisateur.any? ? UtilisateursHelper.droits[:pelo] : UtilisateursHelper.droits[:admin])
+  #     #@utilisateur.droit = Utilisateur.any? ? UtilisateursHelper.droit[:pelo] : UtilisateursHelper.droit[:admin]
+  #     Utilisateur.update(@utilisateur.id, droit: Utilisateur.any? ? UtilisateursHelper.droit[:pelo] : UtilisateursHelper.droit[:admin])
   #     UtilisateurMailer.verif_mairie_reussie(@utilisateur).deliver_now
   #   else
   #     forbidden
@@ -97,7 +101,7 @@ class UtilisateursController < ApplicationController
         :image,
         :password,
         :password_confirmation,
-        :droits
+        :droit
     )
   end
 

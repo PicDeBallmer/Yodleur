@@ -37,7 +37,7 @@ class Utilisateur < ApplicationRecord
 
   before_validation :before_validation
 
-  enum droits: [ :pelo, :elu, :admin, :en_attente ]
+  enum droit: [:pelo, :elu, :admin, :en_attente ]
 
   def nom_complet
     [prenom.to_s, nom.upcase.to_s].delete_if{ |s| s.empty? }.join(' ')

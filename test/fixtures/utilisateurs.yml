@@ -14,7 +14,7 @@ jeanlasalle:
   nom: 'Lasalle'
   prenom: 'Jean'
   mail: 'jean.lasalle@lourdios-ichere.fr'
-  droits: 0
+  droit: 0
   civilite: 0
   date_de_naissance: <%= '3-5-1955'.to_date %>
   lieu: villeurbanne

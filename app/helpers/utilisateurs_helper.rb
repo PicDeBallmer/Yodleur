@@ -1,7 +1,7 @@
 module UtilisateursHelper
-  def self.droits_egal?(cible, droit)
-    droits[cible] == droit
-  end
+  # def self.droits_egal?(cible, droit)
+  #   droit[cible] == droit
+  # end
 
   def tous_delegueurs utilisateur
     utilisateur.delegations_recues.collect{|d| {donneur: d.donneur, categorie: d.categorie}}
@@ -11,11 +11,11 @@ module UtilisateursHelper
     utilisateur.delegations_donnees.collect{|d| {receveur: d.receveur, categorie: d.categorie}}
   end
 
-  # def self.droits_select
-  #   # Convertit la liste de droits dans la format [[:pelo, 0], ...]
-  #   # Utilisé pour les <select>
-  #   droits.to_a
-  # end
+  def droits_select utilisateur
+    # Convertit la liste de droit dans la format [[:pelo, 0], ...]
+    # Utilisé pour les <select>
+    Utilisateur.droits.to_a
+  end
 
   def self.civilites
     {

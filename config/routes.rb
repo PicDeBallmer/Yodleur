@@ -31,4 +31,7 @@ Rails.application.routes.draw do
   get 'log_in' => 'sessions#new', :as => 'log_in'
   get 'sign_up' => 'utilisateurs#new', :as => 'sign_up'
 
+  # administration
+  get 'admin' => 'admin#index'
+
 end

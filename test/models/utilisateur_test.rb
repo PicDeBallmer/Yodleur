@@ -8,7 +8,7 @@ class UtilisateurTest < ActiveSupport::TestCase
         nom: 'Lasalle',
         prenom: 'Jean',
         mail: 'jean.lasalle2@lourdios-ichere.fr',
-        droits: 0,
+        droit: 0,
         civilite: 0,
         date_de_naissance: '3-5-1955'.to_date,
         lieu: Lieu.find_by(nom: 'Villeurbanne'),
@@ -18,7 +18,7 @@ class UtilisateurTest < ActiveSupport::TestCase
     assert utilisateur.save
   end
 
-  test "droits enum" do
+  test "droit enum" do
     assert utilisateurs(:jeanlasalle).pelo?
     assert_not utilisateurs(:jeanlasalle).elu?
     assert_not utilisateurs(:jeanlasalle).admin?
