@@ -65,11 +65,11 @@ class Utilisateur < ApplicationRecord
   end
 
   def self.search(search)
-    Utilisateur.where("lower(nom) LIKE ?", "%#{search.downcase}%")
-      .or(Utilisateur.where("lower(prenom) LIKE ?", "%#{search.downcase}%"))
-      .or(Utilisateur.where("lower(mail) LIKE ?", "%#{search.downcase}%"))
-      .or(Utilisateur.where("lower(concat_ws(' ', prenom, nom)) LIKE ?", "%#{search.downcase}%"))
-      .or(Utilisateur.where("lower(concat_ws(' ', nom, prenom)) LIKE ?", "%#{search.downcase}%"))
+    Utilisateur.where("lower(nom) LIKE ?", "%#{search.downcase}%").
+      or(Utilisateur.where("lower(prenom) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(mail) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(concat_ws(' ', prenom, nom)) LIKE ?", "%#{search.downcase}%")).
+      or(Utilisateur.where("lower(concat_ws(' ', nom, prenom)) LIKE ?", "%#{search.downcase}%")).
   end
 
   private
