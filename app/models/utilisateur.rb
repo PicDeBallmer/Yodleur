@@ -9,11 +9,9 @@ class Utilisateur < ApplicationRecord
            class_name: 'Delegation',
            foreign_key: 'donneur_id'
   has_many :delegueurs,
-           # class_name: 'Utilisateur',
            :through => :delegations_recues,
            :source => :receveur
   has_many :delegues,
-           # class_name: 'Utilisateur',
            :through => :delegations_donnees,
            :source => :donneur
   has_many :sujets_crees,
