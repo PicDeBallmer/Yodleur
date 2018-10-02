@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require tachyons.min
  */
 
  .vcenter {
@@ -24,3 +25,4 @@
    display: flex;
    align-items: center;
  }
+
