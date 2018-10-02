@@ -9,7 +9,7 @@
       <%= form_tag(voter_path, method: 'get', id: 'search-form') do %>
           <p>
             <%= text_field_tag :search, params[:search], placeholder: 'Recherche...' %>
-            <%= submit_tag 'Rechercher' %>
+            <%= submit_tag 'Rechercher', class: 'btn btn-default' %>
           </p>
       <% end %>
     </div>
