@@ -7,19 +7,19 @@
 
   <% else %>
 
-    <div class="text-center">
+    <div class="text-center w5 center mv4">
       <% if logged_in? %>
 
         <%= form_for @sujet, url: {action: 'incremente_votes_pour'} do |f| %>
-        <%= f.submit 'Je vote Pour', class: 'btn btn-default' %>
+        <%= f.submit 'Je vote Pour', class: 'btn btn-default w-100 mv2' %>
         <% end %>
 
         <%= form_for @sujet, url: {action: 'incremente_votes_contre'} do |f| %>
-        <%= f.submit 'Je vote Contre', class: 'btn btn-default' %>
+        <%= f.submit 'Je vote Contre', class: 'btn btn-default w-100 mv2' %>
         <% end %>
 
         <%= form_for @sujet, url: {action: 'incremente_votes_blancs'} do |f| %>
-        <%= f.submit 'Je vote Blanc', class: 'btn btn-default' %>
+        <%= f.submit 'Je vote Blanc', class: 'btn btn-default w-100 mv2' %>
         <% end %>
 
       <% else %>
