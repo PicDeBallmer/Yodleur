@@ -19,3 +19,8 @@
      vertical-align: middle;
      float: none;
  }
+
+ .navbar-right {
+   display: flex;
+   align-items: center;
+ }
