@@ -10,7 +10,6 @@
     <%= f.select :categorie_id, categories_delegables.pluck(:nom, :id) %>
   </p>
   <p>
-    <%= f.submit 'Déléguer' %>
+    <%= f.submit 'Déléguer', class: 'btn btn-default' %>
   </p>
 <% end %>
-
