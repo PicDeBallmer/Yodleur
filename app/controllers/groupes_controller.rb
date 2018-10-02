@@ -90,26 +90,26 @@ class GroupesController < ApplicationController
   #   redirect_to :groupes
   # end
 
-  # def graphe
-  #   @groupe = Groupe.find(params[:id])
-  #   respond_to do |format|
-  #     format.json {
-  #
-  #       nodes = @groupe.sujets
-  #       links = nodes.select {|node| !node.parent.nil?}.collect do |node|
-  #         {
-  #             source: nodes.index(node),
-  #             target: nodes.index(node.parent)
-  #         }
-  #       end
-  #
-  #       render json: {
-  #           nodes: nodes,
-  #           links: links
-  #       }
-  #     }
-  #   end
-  # end
+  def graphe
+    @groupe = Groupe.find(params[:id])
+    respond_to do |format|
+      format.json {
+
+        nodes = @groupe.sujets
+        links = nodes.select {|node| !node.parent.nil?}.collect do |node|
+          {
+              source: nodes.index(node),
+              target: nodes.index(node.parent)
+          }
+        end
+
+        render json: {
+            nodes: nodes,
+            links: links
+        }
+      }
+    end
+  end
 
   private
   def groupe_params
