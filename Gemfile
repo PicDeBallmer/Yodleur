@@ -63,3 +63,5 @@ gem 'mini_magick', '3.8.0'
 # Add D3 JS lib
 gem 'd3-rails'
 
+# Tachyons
+gem 'tachyons-rails'
