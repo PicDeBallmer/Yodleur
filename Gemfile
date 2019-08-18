@@ -74,7 +74,7 @@ gem 'twitter-bootstrap-rails'
 
 # Gestion d'images
 gem 'carrierwave', '0.10.0'
-gem 'mini_magick', '3.8.0'
+gem "mini_magick", ">= 4.9.4"
 
 # Add D3 JS lib
 gem 'd3-rails'
