@@ -43,7 +43,7 @@ group :development, :test do
 
   # Enable remote debug
   gem 'ruby-debug-ide'
-  gem 'debase'
+  # gem 'debase'
 end
 
 group :development do
