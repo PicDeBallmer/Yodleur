@@ -42,13 +42,13 @@ class Sujet < ApplicationRecord
   #                                :query => { "src" => "fr",
   #                                            "dest" => "en",
   #                                            "text" => texte,
-  #                                            "email" => "bara.julien@yahoo.fr",
+  #                                            "email" => "xxx",
   #                                            "password" => Rails.application.secrets.mot_de_passe_gmail})
   #
   #   begin
   #
   #     response = HTTParty.post("http://gateway-a.watsonplatform.net/calls/text/TextGetEmotion",
-  #                              :query => { "apikey" => "b76a130b969313ddf8daeac0cce33f44757579ee",
+  #                              :query => { "apikey" => "xxx",
   #                                          "text" => texteEnglish["root"]["translation"],
   #                                          "outputMode" => "json"},
   #                              :headers => { "Content-Type" => "application/x-www-form-urlencoded"})
