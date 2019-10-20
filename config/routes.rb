@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   resources :sujets do
     resources :commentaires
   end
-  
+
   # session
   get 'sessions/new'
   get 'log_out' => 'sessions#destroy', :as => 'log_out'

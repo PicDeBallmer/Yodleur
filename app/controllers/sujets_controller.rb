@@ -8,19 +8,19 @@ class SujetsController < ApplicationController
     if @sujet.nil?
       redirect_to root_path
     end
-    
+
     commentaires = ""
-    
+
     @sujet.commentaires.each do |com|
       commentaires = commentaires + com.texte + " "
     end
-    
+
     if commentaires != ""
       retour = @sujet.emotion(commentaires)
     else
       retour = "ERROR"
     end
-    
+
     if retour != "ERROR"
       @Colere = retour[0]
       @Degout = retour[1]
@@ -82,7 +82,7 @@ class SujetsController < ApplicationController
   def incremente_votes_blancs
     incremente_votes(:votes_blancs)
   end
-  
+
   private
     def incremente_votes(type_vote)
       @sujet = Sujet.find_by_id(params[:id])
