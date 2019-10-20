@@ -2,7 +2,7 @@
 
 ## How to launch docker project
 ```
-docker-compose up
+docker-compose up -d
 docker-compose run web rake db:create
 docker-compose run web rake db:schema:load
 docker-compose run web rake db:seed
