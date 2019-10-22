@@ -19,7 +19,7 @@ rails db:seed
 rails server
 ```
 
-### Laucnh tests
+### Launch tests
 ```
 rails test
 ```
