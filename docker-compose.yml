@@ -7,6 +7,8 @@ services:
       - database:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust # TODO: secure database connexion
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
