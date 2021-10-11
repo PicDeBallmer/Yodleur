@@ -37,6 +37,11 @@ jobs:
         ruby-version: 2.7.2
     - name: Install dependencies
       run: bundle install
+    - name: Setup test database
+      env:
+        RAILS_ENV: test
+        PGHOST: localhost
+      run: rails db:setup
     - name: Run tests
       env:
           PGHOST: localhost
