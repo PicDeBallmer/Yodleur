@@ -38,4 +38,6 @@ jobs:
     - name: Install dependencies
       run: bundle install
     - name: Run tests
+      env:
+          PGHOST: localhost
       run: rails test
