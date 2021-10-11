@@ -25,8 +25,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: yodleur_test
           POSTGRES_PASSWORD: ""
-          POSTGRES_HOST: postgres
-        ports: ["5432:5432"]
+        ports:
+          - 5432:5432
 
     steps:
     - uses: actions/checkout@v2
@@ -41,9 +41,9 @@ jobs:
     - name: Setup test database
       env:
         RAILS_ENV: test
-        PGHOST: postgres
-      run: rails db:setup
+        PGHOST: localhost
+      run: rails db:create
     - name: Run tests
       env:
-        PGHOST: postgres
+        PGHOST: localhost
       run: rails test
