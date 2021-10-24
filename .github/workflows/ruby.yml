@@ -18,6 +18,22 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          # POSTGRES_USER: postgres
+          # POSTGRES_DB: yodleur_test
+          POSTGRES_PASSWORD: password
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -28,5 +44,15 @@ jobs:
         ruby-version: 2.7.2
     - name: Install dependencies
       run: bundle install
+    - name: Setup test database
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PASSWORD: password
+        RAILS_ENV: test
+      run: rails db:create
     - name: Run tests
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PASSWORD: password
+        RAILS_ENV: test
       run: rails test
