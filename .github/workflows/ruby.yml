@@ -47,11 +47,11 @@ jobs:
     - name: Setup test database
       env:
         RAILS_ENV: test
-        POSTGRES_HOST: postgres
+        POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: password
       run: rails db:create
     - name: Run tests
       env:
-        POSTGRES_HOST: postgres
+        POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: password
       run: rails test
