@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_HOST_AUTH_METHOD=trust # TODO: secure database connexion
+      POSTGRES_PASSWORD: password
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -21,7 +21,8 @@ services:
     depends_on:
       - db
     environment:
-      - PGHOST=db
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=password
 volumes:
   database:
   # TODO: remove when pictures persisted in db
