@@ -18,13 +18,6 @@ class UtilisateurTest < ActiveSupport::TestCase
     assert utilisateur.save
   end
 
-  test "droit enum" do
-    assert utilisateurs(:jeanlasalle).pelo?
-    assert_not utilisateurs(:jeanlasalle).elu?
-    assert_not utilisateurs(:jeanlasalle).administrateur?
-    assert_not utilisateurs(:jeanlasalle).en_attente?
-  end
-
   test "nom_complet function" do
     assert_equal 'Jean LASALLE',utilisateurs(:jeanlasalle).nom_complet
   end
