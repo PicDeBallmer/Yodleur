@@ -46,12 +46,13 @@ jobs:
       run: bundle install
     - name: Setup test database
       env:
-        RAILS_ENV: test
         POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: password
+        RAILS_ENV: test
       run: rails db:create
     - name: Run tests
       env:
         POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: password
+        RAILS_ENV: test
       run: rails test
