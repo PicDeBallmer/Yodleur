@@ -44,12 +44,18 @@ jobs:
         ruby-version: 2.7.2
     - name: Install dependencies
       run: bundle install
-    - name: Setup test database
+    - name: Setup create database
       env:
         POSTGRES_HOST: localhost
         POSTGRES_PASSWORD: password
         RAILS_ENV: test
       run: rails db:create
+    - name: Setup database schema
+      env:
+        POSTGRES_HOST: localhost
+        POSTGRES_PASSWORD: password
+        RAILS_ENV: test
+      run: rails db:schema:load
     - name: Run tests
       env:
         POSTGRES_HOST: localhost
